@@ -1,0 +1,12 @@
+{
+  "position": 2,
+  "label": "모던 리액트 Deep Dive",
+  "collapsible": true,
+  "collapsed": true,
+  "className": "red",
+  "link": {
+    "type": "generated-index",
+    "title": "모던 리액트 Deep Dive",
+    "description": "React 및 JS, 웹 기초 강화"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "position": 3,
+  "label": "우아한 타입스크립트 with 리액트",
+  "collapsible": true,
+  "collapsed": true,
+  "className": "red",
+  "link": {
+    "type": "generated-index",
+    "title": "우아한 타입스크립트 with 리액트",
+    "description": "Typescript 기초 보완"
+  }
+}
