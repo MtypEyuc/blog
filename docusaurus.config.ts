@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'My Site',
+  title: '블로그 이름',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -26,9 +26,35 @@ const config: Config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
+  // https://docusaurus.io/ko/docs/next/i18n/tutorial
+  // npm run write-translations -- --locale ko
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'ko',
+    // locales: ['ko', 'en', 'jp', 'fr', 'es'],
+    // locales: ['ko', 'en', 'jp'],
+    locales: ['ko'],
+    localeConfigs: {
+      'ko': {
+        label: 'ko-한국어',
+        htmlLang: 'ko',
+      },
+      'en': {
+        label: 'en-English',
+        htmlLang: 'en',
+      },
+      'jp': {
+        label: 'jp-日本語',
+        htmlLang: 'jp',
+      },
+      'fr': {
+        label: 'fr-Français',
+        htmlLang: 'fr',
+      },
+      'es': {
+        label: 'es-Español',
+        htmlLang: 'es',
+      },
+    }
   },
 
   presets: [
@@ -64,28 +90,62 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-project',
+        path: 'docs-project',
+        routeBasePath: 'docs-project',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'docs-learn',
+        path: 'docs-learn',
+        routeBasePath: 'docs-learn',
+        sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    // [
+    //   '@docusaurus/plugin-content-blog',
+    //   {
+    //     /**
+    //      * Required for any multi-instance plugin
+    //      */
+    //     id: 'life',
+    //     /**
+    //      * URL route for the blog section of your site.
+    //      * *DO NOT* include a trailing slash.
+    //      */
+    //     routeBasePath: 'life',
+    //     /**
+    //      * Path to data on filesystem relative to site dir.
+    //      */
+    //     path: 'life',
+    //   },
+    // ],
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: '블로그 이름',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
+        { position: 'left', label: 'Tutorial', type: 'docSidebar', sidebarId: 'tutorialSidebar', },
+        { position: 'left', label: 'Project', to: '/docs-project/intro', activeBaseRegex: `/docs-project/`,}, // ./docs-project/Intro.md
+        { position: 'left', label: 'Learn', to: '/docs-learn/intro', activeBaseRegex: `/docs-learn/`,}, // ./docs-learn/Intro.md
+        { position: 'left', label: 'Blog', to: '/blog', },
+        // { position: 'left', label: 'Life', to: '/life', },
+        { position: 'right', type: 'localeDropdown', },
+        { position: 'right', label: 'GitHub', href: 'https://github.com/MtypEyuc', },
       ],
     },
     footer: {
