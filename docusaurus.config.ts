@@ -191,6 +191,17 @@ const config: Config = {
           ],
         },
       ],
+      logo: {
+        alt: 'footer Logo',
+        src: 'img/random_gif_emojis.gif',
+        srcDark: 'img/construction.jpg',
+        href: 'https://docusaurus.io/',
+        target: '_self',
+        width: 64,
+        height: 64,
+        className: 'custom-navbar-logo-class',
+        style: {border: 'solid green'},
+      },
       copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
     },
     prism: {
