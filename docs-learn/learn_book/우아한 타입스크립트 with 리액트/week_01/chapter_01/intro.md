@@ -2,8 +2,6 @@
 sidebar_position: 1
 title: 우아한 타입스크립트 with 리액트
 description: 우아한 타입스크립트 with 리액트
-date: 2025-02-04T00:11:11+09:00
-lastmod: 2025-02-04T11:11:00+09:00
 authors: [MtypEyuc]
 tags: [typescript]
 image: https://i.imgur.com/mErPwqL.png
