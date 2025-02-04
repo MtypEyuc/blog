@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
-title: asd
-description: 내집마련 해커톤'을 통한 개인 블로그 제작 과정 소개
-date: 2019-09-21T00:00:00+09:00
-lastmod: 2019-09-21T00:00:00+09:00
-authors: [minho]
-tags: [hackerton]
+title: 우아한 타입스크립트 with 리액트
+description: 우아한 타입스크립트 with 리액트
+date: 2025-02-04T00:11:11+09:00
+lastmod: 2025-02-04T11:11:00+09:00
+authors: [MtypEyuc]
+tags: [typescript]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
