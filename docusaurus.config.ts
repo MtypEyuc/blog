@@ -130,6 +130,13 @@ const config: Config = {
   ],
 
   themeConfig: {
+    docs:{
+      versionPersistence: 'localStorage',
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: false,
+      },
+    },
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
@@ -147,6 +154,7 @@ const config: Config = {
         { position: 'right', type: 'localeDropdown', },
         { position: 'right', label: 'GitHub', href: 'https://github.com/MtypEyuc', },
       ],
+      hideOnScroll : true
     },
     footer: {
       style: 'dark',
