@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 title: 타입
 description: 타입
 authors: [MtypEyuc]

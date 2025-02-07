@@ -34,7 +34,7 @@ function sum(a, b) {
 var total = sum(10, 20);
 total.toLocaleString();
 ```
-![](img/20250204_224711.jpg)
+![](chapter_01/img/20250204_224711.jpg)
 
 ## 협업에 유리
 - 안터페이스와 제너릭을 지원하기 때문에 복잡한 코드를 더 쉽게 설명하고 이해할 수 있게 된다.
