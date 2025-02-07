@@ -1,14 +1,12 @@
 ---
 sidebar_position: 1
-title: 우아한 타입스크립트 with 리액트
-description: 우아한 타입스크립트 with 리액트
+title: 타입스크립트의 등장배경
+description: 타입스크립트의 등장배경
 authors: [MtypEyuc]
 tags: [typescript]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
-
-# 타입스크립트의 등장배경
 
 ## 웹 어플리케이션의 발전
 
@@ -34,7 +32,7 @@ function sum(a, b) {
 var total = sum(10, 20);
 total.toLocaleString();
 ```
-![](chapter_01/img/20250204_224711.jpg)
+![](img/20250204_224711.jpg)
 
 ## 협업에 유리
 - 안터페이스와 제너릭을 지원하기 때문에 복잡한 코드를 더 쉽게 설명하고 이해할 수 있게 된다.
