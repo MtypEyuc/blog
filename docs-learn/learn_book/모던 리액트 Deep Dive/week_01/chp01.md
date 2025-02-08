@@ -12,7 +12,7 @@ hide_table_of_contents: false
 ### 자바스크립트에서의 동등 비교
 #### 자바스크립트의 데이터 타입
 데이터 타입을 구분하는 가장 큰 차이점은 값을 저장하는 방식이며 이 방식의 차이가 동등 비교를 할 때 차이를 만드는 원인이 된다.  
-원시타은 불변형의 값으로 저장되며, 이 값은 변수 할당 시점에 메모리 영역을 차지하고 저장된다. 객체는 프로퍼티를 삭제, 추가,   
+원시타입은 불변형의 값으로 저장되며, 이 값은 변수 할당 시점에 메모리 영역을 차지하고 저장된다. 객체는 프로퍼티를 삭제, 추가,   
 수정할 수 있으므로 원시의 값과 다르게 변경 가능한 형태로 저장되며, 값을 복사할 때도 값이 아닌 참조를 전달하게 된다. 
 
 - 원시 타입  
@@ -83,7 +83,7 @@ import { useState } from "react";
 function App() {
   const [count, setCount] = useState(0);
 
-  console.log(Object.is(count, -0)); // 함수를 호출하면 Object.is(0, -0) 비교가 수행됨 0 !== -0이므로 리랜더링 발생
+  console.log(Object.is(count, -0)); // 함수를 호출하면 Object.is(0, -0) 비교가 수행됨 0 !== -0이므로 리렌더링 발생
 
   return (
     <div>
@@ -100,7 +100,7 @@ function App() {
 2 depth(객체안의 다른 객체) 의 경우 `false`를 반환한다.
 ```tsx
 import React from "react";
-//memo를 사용해서 느슨한 비교를 수행하고 비교 후 신규 데이터 입력시(false) 랜더링.
+//memo를 사용해서 느슨한 비교를 수행하고 비교 후 신규 데이터 입력시(false) 렌더링.
 const MyComponent = React.memo(({ data }) => {
   console.log("Rendered!");
   return <div>{data.hello}</div>;
@@ -112,8 +112,8 @@ export default function App() {
 
   return (
     <>
-      <MyComponent data={obj1} /> {/* 최초 랜더링 */} //true
-      <MyComponent data={obj2} /> {/* 주소가 다르기 때문에 리랜더링 */} //false
+      <MyComponent data={obj1} /> {/* 최초 렌더링 */} //true
+      <MyComponent data={obj2} /> {/* 주소가 다르기 때문에 리렌더링 */} //false
       <MyComponent data={{ hello: "world" }} /> {/* 새로운 객체 → 렌더링 발생 */} //false
     </>
   );
@@ -755,4 +755,13 @@ console.log(carKeys); // ["brand", "model", "year"]
 - [공식 문서](https://www.typescriptlang.org/ko/docs/handbook/tsconfig-json.html)
 
 ## 작성하며 느낀 점
-리액트에서 사용하는 자바스크립트 문법과 타입스크립트를 사용해야 하는 이유에 대해 알아보는 시간을 가졌다.
+- 좋았던 점 : 리액트 개발을 위한 필수적인 개념을 학습하게 되었다. 여러가지 개념을 알게 된 것이 좋았다.
+
+
+- 배운 점 : 객체의 타입 비교, 함수 표현 방식, 코드 실행 순서 등을 배웠다.
+
+
+- 부족했던 점 : 정형화된 코드만을 기계적으로 작성하다 보니 실제로 만드는 것에 문제가 있었다. 
+
+
+- 다음 목표 : 리액트에서 자주 사용하는 문법의 예시를 사용해 볼 것이다.
