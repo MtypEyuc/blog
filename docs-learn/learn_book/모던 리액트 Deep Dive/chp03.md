@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: 리액트 훅 깊게 살펴보기
+title: "3장: 리액트 훅 깊게 살펴보기"
 description: 리액트 훅 깊게 살펴보기
 authors: [MtypEyuc]
 tags: [React]

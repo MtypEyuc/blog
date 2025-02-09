@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: 리액트 핵심 요소 깊게 살펴보기
+title: "2장: 리액트 핵심 요소 깊게 살펴보기"
 description: 리액트 핵심 요소 깊게 살펴보기
 authors: [MtypEyuc]
 tags: [React]

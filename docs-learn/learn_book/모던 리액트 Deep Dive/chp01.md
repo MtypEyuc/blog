@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: 리액트 개발을 위해 꼭 알아야 할 자바스크립트
+title: "1장: 리액트 개발을 위해 꼭 알아야 할 자바스크립트"
 description: 리액트 개발을 위해 꼭 알아야 할 자바스크립트
 authors: [MtypEyuc]
 tags: [React]
