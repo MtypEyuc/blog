@@ -1,13 +1,11 @@
 ---
 sidebar_position: 2
-title: 타입
+title: "2장: 타입"
 description: 타입
 authors: [MtypEyuc]
 tags: [typescript]
 hide_table_of_contents: false
 ---
-
-# 타입
 
 ## 강타입과 약타입
 ### 강타입
