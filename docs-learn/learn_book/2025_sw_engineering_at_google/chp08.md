@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: 스타일 가이드와 규칙
+title: "8장: 스타일 가이드와 규칙"
 description: 스타일 가이드와 규칙
 authors: [MtypEyuc]
 tags: [work]

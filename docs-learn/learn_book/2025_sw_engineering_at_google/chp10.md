@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: 문서자료
+title: "10장: 문서자료"
 description: 문서자료
 authors: [MtypEyuc]
 tags: [work]

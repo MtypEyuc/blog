@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: 버전 관리와 브랜치 관리
+title: "16장: 버전 관리와 브랜치 관리"
 description: 버전 관리와 브랜치 관리
 authors: [MtypEyuc]
 tags: [work]

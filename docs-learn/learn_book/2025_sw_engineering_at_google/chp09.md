@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: 코드 리뷰
+title: "9장: 코드 리뷰"
 description: 코드 리뷰
 authors: [MtypEyuc]
 tags: [work]
