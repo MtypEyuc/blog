@@ -69,15 +69,15 @@ const config: Config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          showReadingTime: true,
+          showLastUpdateTime:false,
+          postsPerPage: 1,
+          include: ['post/**/*.md','post/**/*.mdx','home/**/*.mdx'],
+          blogSidebarCount: "ALL",
+          showReadingTime: false,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -149,7 +149,7 @@ const config: Config = {
         { position: 'left', label: 'Tutorial', type: 'docSidebar', sidebarId: 'tutorialSidebar', },
         { position: 'left', label: 'Project', to: '/docs-project/intro', activeBaseRegex: `/docs-project/`,}, // ./docs-project/Intro.md
         { position: 'left', label: 'Learn', to: '/docs-learn/intro', activeBaseRegex: `/docs-learn/`,}, // ./docs-learn/Intro.md
-        { position: 'left', label: 'Blog', to: '/blog', },
+        { position: 'left', label: 'Blog', to: '/blog/home', },
         // { position: 'left', label: 'Life', to: '/life', },
         { position: 'right', type: 'localeDropdown', },
         { position: 'right', label: 'GitHub', href: 'https://github.com/MtypEyuc', },
