@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 7
 title: "7장 비동기 호출"
 description: 비동기 호출
 authors: [MtypEyuc]

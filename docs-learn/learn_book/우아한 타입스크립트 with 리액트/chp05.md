@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: "5장 타입 활용하기"
 description: 타입 활용하기
 authors: [MtypEyuc]
