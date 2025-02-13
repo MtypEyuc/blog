@@ -186,7 +186,7 @@ export default function App() {
 }
 ```
 각 컴포넌트 트리에서 상태를 독립적으로 관리하며 다른 컴포넌트에서 동적상태를 업데이트 할 수 있게 된다. 
-### 4. 상태 관리 라이브러리 Recoil, Jotai, Zustand 살펴보기
+### 3. Recoil, Jotai, Zustand 살펴보기
 #### 1. Recoil
 `Atoms` 라는 기본 단위를 사용하며 상태를 정의하고 `selector`로 파생 상태를 계산한다. 최상위 컴포넌트에 `RecoilRoot`로 애플리케이션을 감싸서 사용한다.
 ```tsx
