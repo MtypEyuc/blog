@@ -69,8 +69,8 @@ const config: Config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          showLastUpdateTime:false,
-          postsPerPage: 1,
+          showLastUpdateTime: true,
+          postsPerPage: "ALL",
           include: ['post/**/*.md','post/**/*.mdx','home/**/*.mdx'],
           blogSidebarCount: "ALL",
           showReadingTime: false,
