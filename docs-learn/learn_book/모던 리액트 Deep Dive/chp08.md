@@ -116,7 +116,7 @@ console.log('hello world')
 - 프로젝트 의존성 버전 불일치
 - ESLint 플러그인 또는 공유 설정의 버전 불일치
 - Node.js 버전이 맞지 않음
-```sh
+```
 npm install eslint@8 eslint-config-airbnb@latest eslint-plugin-react@latest --save-dev
 ```
 공식 문서에서는 `peerDependencies`로 설정해 해결하라고 한다.
@@ -137,10 +137,10 @@ test('두 인수가 덧셈이 되어야 한다.', () => {
 expect(sum(2, 2)).toBe(3) // 에러
 })
 ```
-```sh
+```
 $ npm run test
 ```
-```sh
+```
 > jest
 FAIL lessons/jest.test.js
 ✓ 두 인수가 덧셈이 되어야 한다.
