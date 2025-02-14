@@ -116,7 +116,7 @@ console.log('hello world')
 - 프로젝트 의존성 버전 불일치
 - ESLint 플러그인 또는 공유 설정의 버전 불일치
 - Node.js 버전이 맞지 않음
-```
+```sh
 npm install eslint@8 eslint-config-airbnb@latest eslint-plugin-react@latest --save-dev
 ```
 공식 문서에서는 `peerDependencies`로 설정해 해결하라고 한다.
@@ -137,10 +137,10 @@ test('두 인수가 덧셈이 되어야 한다.', () => {
 expect(sum(2, 2)).toBe(3) // 에러
 })
 ```
-```
+```sh
 $ npm run test
 ```
-```
+```sh
 > jest
 FAIL lessons/jest.test.js
 ✓ 두 인수가 덧셈이 되어야 한다.
@@ -183,7 +183,7 @@ describe('링크 확인', () => {
 - beforeEach: 테스트 수행 전 컴포넌트를 렌더링 한다.
 - describe: 비슷한 속성을 가지느 테스트를 하나의 그룹으로 묶는다. 테스트 해야할 코드가 많을 때 사용한다.
 - it: test의 축약어다. 가독성을 높이기 위해 문어체 같이 표현한다.
-- testId: 웹에서 사용하는querySelector([data-testid="${yourId}"])와 동일한 역할을 한다
+- testId: 웹에서 사용하는querySelector(`[data-testid="${yourId}"]`)와 동일한 역할을 한다
 #### 2. 동적 컴포넌트
 일반적으로 리엑트 테스팅 라이브러리(`RTL`)와 `jest`를 조합해 사용한다.
 ##### 1. useState
@@ -267,6 +267,8 @@ test("비동기 데이터가 로드되면 컴포넌트가 변경되어야 한다
 - 유닛 테스트: 개별 컴포넌트가 독립적으로 의도한 대로 작동하는지 검증한다.
 - 통합 테스트: 여러 유닛을 조합하여 하나의 기능이 정상적으로 동작하는지 확인한다.
 - 엔드 투 엔드(E2E) 테스트: 실제 사용자처럼 애플리케이션을 사용하며 전체적인 기능을 검증한다.
+
+
 ## 작성하며 느낀 점
 좋았던 점: 관심 있었던 테스트 기능에 대해 알아보게 되었다.  
 배운 점: ESLint와 테스트 도구에 대해 배웠다.  
