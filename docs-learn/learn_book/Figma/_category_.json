@@ -1,0 +1,12 @@
+{
+  "position": 6,
+  "label": "피그마 독학",
+  "collapsible": true,
+  "collapsed": true,
+  "className": "red",
+  "link": {
+    "type": "generated-index",
+    "title": "피그마 독학",
+    "description": "피그마를 독학하는 내용"
+  }
+}
