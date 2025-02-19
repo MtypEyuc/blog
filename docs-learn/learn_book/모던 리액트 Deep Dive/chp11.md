@@ -54,7 +54,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
 - 공통 UI를 포함할 수 있으며, 공통 코드는 자신과 자식 라우팅에만 미치게 된다. 하위 페이지에 추가된 레이아웃은 해당 주소 하위에만 적용된다.
 ##### 주의할 점
 
-- layout은 app 디렉터리 내부에서는 예약어다. 무조건 layout.{js|jsx|ts|tsx}로 사용해야 하며, 레이아웃 이외의 다른 목적으로는 사용할 수 없다.
+- layout은 app 디렉터리 내부에서는 예약어다. 무조건 `layout.{js|jsx|ts|tsx}`로 사용해야 하며, 레이아웃 이외의 다른 목적으로는 사용할 수 없다.
 
 
 - layout은 children을 props로 받아서 렌더링해야 한다. 레이아웃이므로 당연히 그려야 할 컴포넌트를 외부에서 주입받고 그려야 한다.
@@ -89,7 +89,7 @@ export default function Home() {
 - 일반적으로 별도의 속성값을 받지 않고 라우팅 시 `[...id]`와 같은 파라미터 값이 들어온다.
 
 
-- app 디렉터리 내부의 예약어다. 무조건 page.{js|jsx|ts|tsx}로 사용해야 하며, 레이아웃 이외의 다른 목적으로는 사용할 수 없다.
+- app 디렉터리 내부의 예약어다. 무조건 `page.{js|jsx|ts|tsx}`로 사용해야 하며, 레이아웃 이외의 다른 목적으로는 사용할 수 없다.
 
 
 - 내부에서 반드시 export default로 내보내는 컴포넌트가 있어야 한다.
@@ -252,7 +252,7 @@ Next.js는 fetch의 기본 작동을 재정의해` {next: {revalidate?: number |
 ### 4. 스트리밍을 활용한 점진적인 페이지 불러오기
 렌더링이 끝나야 화면을 출력하는 과거 SSR 방식의 한계를 극복하기 위해 쪼개진 HTML을 점진적으로 보내는 스트리밍 기능을 활용할 수 있다.
 #### 1. 경로에 loading.tsx 배치
-```tsx
+```
 <Layout>
 <Header />
 <SideNav />
