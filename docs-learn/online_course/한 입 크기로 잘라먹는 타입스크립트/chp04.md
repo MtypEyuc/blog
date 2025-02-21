@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: "[Day 4] Any, Unknown, Void, Never, 타입계층도 이해하기 "
 description: 타입 스크립트 강의
 authors: [MtypEyuc]
@@ -98,3 +98,6 @@ A와 B 두개의 타입이 존재할 때 A 타입의 값을 B 타입으로 취�
 
 ## 8. 과제
 ![](./img/04/03.webp)
+
+
+**출처** : [한 입 크기로 잘라먹는 타입스크립트 - 이정환](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/dashboard)
