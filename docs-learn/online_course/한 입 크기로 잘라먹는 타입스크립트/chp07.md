@@ -25,6 +25,7 @@ const add = (a: number, b: number): number => a + b;
 ```
 ---
 #### 2.  매개변수 기본값 설정하기
+
 ```tsx
 function introduce(name = "이정환") {
 	console.log(`name : ${name}`);
