@@ -146,8 +146,8 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        { position: 'left', label: 'Tutorial', type: 'docSidebar', sidebarId: 'tutorialSidebar', },
-        { position: 'left', label: 'Project', to: '/docs-project/intro', activeBaseRegex: `/docs-project/`,}, // ./docs-project/Intro.md
+        // { position: 'left', label: 'Tutorial', type: 'docSidebar', sidebarId: 'tutorialSidebar', },
+        { position: 'left', label: 'Project', to: '/docs-project/퀵 뷰 프로젝트 솔루션 문서', activeBaseRegex: `/docs-project/`,}, // ./docs-project/Intro.md
         { position: 'left', label: 'Learn', to: '/docs-learn/intro', activeBaseRegex: `/docs-learn/`,}, // ./docs-learn/Intro.md
         { position: 'left', label: 'Blog', to: '/blog/home', },
         // { position: 'left', label: 'Life', to: '/life', },
