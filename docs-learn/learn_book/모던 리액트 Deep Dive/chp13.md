@@ -99,13 +99,13 @@ export default MyApp
 - Next.js-render: 경로 변경이 완료된 후 페이지를 렌더링하는 데 걸린 시간
 ## 2. 구글 라이트 하우스
 구글에서 제공하는 웹 페이지 성능 측정 도구로, 오픈소스로 운영되고 있다. 별도의 애플리케이션 수정이 필요없으며 브라우저 확장 프로그램을 설치해 사용할 수 있다.
-![01.webp](img/13/01.webp)
+![01.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/01.webp)
 ### 1. 구글 라이트 하우스 - 탐색 모드
 자료 수집이 완료되면 리포트가 생성된다.
-![02.webp](img/13/02.webp)
+![02.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/02.webp)
 #### 1. 성능
 핵심 웹 지표를 확인할 수 있으며 3가지 추가적인 지표가 있다.
-![06.webp](img/13/06.webp)
+![06.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/06.webp)
 - Time to Interactive(TTI): 페이지에서 사용자가 완전히 상호작용 할 수 있을 때까지 걸린 시점이다.
 
 
@@ -118,27 +118,27 @@ export default MyApp
 
 #### 2. 접근성
 장애인 또는 노인이 동등하게 웹페이지를 사용할 수 있도록 보장하는 것을 말한다. 지표의 점수가 낮을 시 수정 방법을 알려준다.
-![03.webp](img/13/03.webp)
+![03.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/03.webp)
 #### 3. 권장사항
 웹사이트를 개발할 때 고려해야 할 요소들을 얼마나 지키고 있는지 확인할 수 있다. 권장사항에는 보안, 표준 모드, 최신 라이브러리, 소스 맵 등 다양한 요소들이 포함돼 있다.
-![04.webp](img/13/04.webp)
+![04.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/04.webp)
 #### 4. 검색 엔진 최적화
 구글과 같은 검색엔진이 쉽게 웹페이지 정보를 가져가서 공개할 수 있도록 최적화돼 있는지를 확인하는 것을 의미한다.
 검색엔진에 최적화돼 있을수록 검색 엔진의 검색결과 우선순위에 높게 나타나며, 사용자가 유입될 가능성이 높아진다.
-![05.webp](img/13/05.webp)
+![05.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/05.webp)
 
 ### 2. 구글 라이트 하우스 - 기간 모드
 실제 웹 페이지를 탐색하는 동안의 지표를 측정한다. 개발자 도구에서  **기간 모드 시작**을 누른 뒤 성능 측정을 원하는 작업 수행 후 지표를 확인한다.
-![05.webp](img/13/07.webp)
-![05.webp](img/13/08.webp)
-![05.webp](img/13/09.webp)
+![05.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/07.webp)
+![05.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/08.webp)
+![05.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/09.webp)
 대다수의 사용자가 빈번하게 수행할 것으로 예상되는 작업을 기간 모드로 측정하면 성능 최적화에 큰 도움을 얻을 수 있다. 탐색 모드에서는 볼 수 없었던 두 가지 옵션이 생성된다.
 #### 1. 흔적
 상세하게 시간의 흐름에 따라 어떻게 웹페이지가 로딩됐는 지를 보여준다.
-![10.webp](img/13/10.webp)
+![10.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/10.webp)
 #### 2. 트리맵
 웹 페이지 전체 자바스크립트 리소스에서 파일이 리소스 중 차지한 비율을 확인할 수 있으며, 압축된 코드를 읽기 좋게 변환해준다.
-![11.webp](img/13/11.webp)
+![11.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/11.webp)
 ### 3. 구글 라이트 하우스 - 스냅샷
 현제 페이지에서의 성능 지표를 분석한다. 특정 상태를 기준으로 분석할 때 쓰이며 일정 기간 분석을 수행하는 옵션이 아니기 때문에 분석 내용이 제한적이다.
 ## 3. [WebPageTest](https://www.webpagetest.org/)
@@ -161,42 +161,42 @@ export default MyApp
 
 ### 2. Performance Summary
 성능 테스트는 총 3번 이뤄지기 때문에 3개의 서로 다른 결과를 확인할 수 있다.
-![12.webp](img/13/12.webp)
-![13.webp](img/13/13.webp)
+![12.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/12.webp)
+![13.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/13.webp)
 
 ### 3. Opportunities & Experiments
 웹 사이트에 대한 평가를 총 3가지로 나눠서 보여준다. 클릭해서 자세한 내용을 확인할 수 있다.
-![14.webp](img/13/14.webp)
+![14.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/14.webp)
 ### 4. Filmstrip
 마치 필름을 보는 것처럼 시간의 흐름에 따라 어떻게 웹사이트가 그려졌는지, 또 이때 어떤 리소스가 불러와졌는지 볼 수 있는 메뉴다.
-![15.webp](img/13/15.webp)
+![15.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/15.webp)
 ### 5. Details
 Filmstrip을 더 자세하게 볼 수 있다.
 ### 6. Web Vitals
 LCP, CLS, TBT의 자세한 내용을 확인할 수 있따.
 ### 7. Optimizations
 최적화와 관련된 메뉴로, 리소스들이 얼마나 최적화돼 있는지 나타낸다.
-![16.webp](img/13/16.webp)
+![16.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/16.webp)
 ### 8. Content
 웹사이트에서 제공하는 콘텐츠, 애셋을 종류별로 묶어 통계를 보여준다. 애셋 종류별 크기와 로딩 과정을 확인할 수 있으며, 시간의 흐름에 따라 렌더링을 거치면서 또 어떻게 애셋을 불러오는지도 확인할 수 있다.
-![17.webp](img/13/17.webp)
+![17.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/17.webp)
 ### 9. Domains
 Content 메뉴에서 보여준 애셋들이 어느 도메인에서 왔는지를 도메인별로 묶어서 확인할 수 있다.그리고 해당 도메인별로 요청한 크기는 어느 정도인지도 확인할 수 있다.
-![18.webp](img/13/18.webp)
+![18.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/18.webp)
 ### 10. Detected Technologies
 웹사이트를 개발하는 데 사용된 기술을 확인할 수 있는 메뉴다.
-![19.webp](img/13/19.webp)
+![19.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/19.webp)
 ### 11. Main-thread Processing
 #### 1. Processing Breakdown
 메인 스레드가 어떤 작업을 처리했는지 확인할 수 있다. 또한 실제로 어떠한 작업을 하고 있었는지 상세하게 확인할 수 있다.
-![20.webp](img/13/20.webp)
+![20.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/20.webp)
 #### 2. Timing Breakdown
 유휴 시간을 포함해 메인 스레드의 작업을 확인할 수 있다.
-![21.webp](img/13/21.webp)
+![21.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/21.webp)
 
 ## 4. 크롬 개발자 도구
 책은 `Performance Insights`를 사용해 성능 지표를 확인하는 설명을 하고 있다. 지원을 중단했기 때문에 책의 예제는 사용할 수 없다. 기존에 지원하던 도구들은 실험실 탭으로 가거나 설정 - 트롤링 옵션을 통해 이용할 수 있다. 사용법은 영상에서 확인 가능하다.
-![22.webp](img/13/22.webp)
+![22.webp](../../../static/img/모던%20리액트%20Deep%20Dive/13/22.webp)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5PFmGeCZDvw?si=lBN_uEQSEfU0RgL0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 작성하고 느낀 점

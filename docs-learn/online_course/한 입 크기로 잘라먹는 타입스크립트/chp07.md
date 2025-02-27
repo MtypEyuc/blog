@@ -144,6 +144,6 @@ func2 = func1; // ❌
 ```
 ----
 ## 4. <span style={{ color: '#ffd33d' }}> 과제 </span>
-![01.webp](img/07/01.webp)
-![02.webp](img/07/02.webp)
-![03.webp](img/07/03.webp)
+![01.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/07/01.webp)
+![02.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/07/02.webp)
+![03.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/07/03.webp)

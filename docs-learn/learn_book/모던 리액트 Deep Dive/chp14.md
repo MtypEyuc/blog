@@ -392,11 +392,11 @@ server {
 ```
 ---
 ### 9. [보안 헤더 확인하기](https://securityheaders.com/)
-![01.webp](img/14/02.webp)
+![01.webp](../../../static/img/모던%20리액트%20Deep%20Dive/14/02.webp)
 
 ---
 ## 5. [취약점이 있는 패키지의 사용을 피하자](https://security.snyk.io/)
-![01.webp](img/14/01.webp)
+![01.webp](../../../static/img/모던%20리액트%20Deep%20Dive/14/01.webp)
 
 ---
 ## 6. [OWASP Top 10](https://owasp.org/www-project-top-ten/)

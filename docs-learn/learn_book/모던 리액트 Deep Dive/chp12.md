@@ -79,7 +79,7 @@ window.addEventListener("load", () => {
 ```
 - LCP 요소가 이미지인 경우 `preload`를 사용해 브라우저가 요소를 미리 로드하게 만들어 시간을 단축시킬 수 있다.
 ### 4. [기준 점수](https://web.dev/articles/lcp?hl=ko)
-![](./img/12/01.webp)
+![](../../../static/img/모던%20리액트%20Deep%20Dive/12/01.webp)
 ### 5. 개선 방안
 #### 1. 텍스트는 언제나 옳다.
 텍스트는 어떤 요소보다 로딩이 빠르기 때문에 LCP 예상 영역에 문자열을 채우면 사용자에게 텍스트를 빠르게 노출하기 때문에 점수가 높아진다.
@@ -158,7 +158,7 @@ document.querySelector("button")?.addEventListener("click", () => {
 <script src="https://third-party-ad.com/ad.js"></script>
 ```
 ### 4. [기준 점수](https://web.dev/articles/fid?hl=ko)
-![](./img/12/02.webp)
+![](../../../static/img/모던%20리액트%20Deep%20Dive/12/02.webp)
 ### 5. 개선 방안
 #### 1. 무거운 코드로 인한 FID 악화
 ```tsx
@@ -221,7 +221,7 @@ window.addEventListener("DOMContentLoaded", () => {
 ```
 - 이미지가 처음에 안 보이다가 로딩되면서 컨텐츠가 밀려난다.
 ### 4. [기준 점수](https://web.dev/articles/cls?hl=ko)
-![](./img/12/03.webp)
+![](../../../static/img/모던%20리액트%20Deep%20Dive/12/03.webp)
 - 영향분율: 레이아웃 이동이 발생한 요소의 높이와 뷰포트 높이의 비율
 - 거리분율: 이동이 발생한 요소가 움직인 거리와 뷰포트 높이의 비율
 - 영향분율 x 거리분율 로 계산해 최종 점수를 계산한다.
@@ -251,12 +251,12 @@ window.addEventListener("DOMContentLoaded", () => {
 페이지를 요청했을 때 최초의 응답이 오는 바이트가 얼마나 걸리는지를 측정하는 지표이다.
 
 
-![](./img/12/04.webp)
+![](../../../static/img/모던%20리액트%20Deep%20Dive/12/04.webp)
 #### 2. [최초 콘텐츠풀 페인트(First Contentful Paint, FCP)](https://web.dev/articles/fcp?hl=ko)
 페이지가 로드되기 시작한 시점부터 페이지 콘텐츠의 일부가 화면에 렌더링될 때까지의 시간을 측정하는 지표이다. 즉 웹 사이트에 **뭐라도 뜨기 시작한** 시점이다.
 
 
-![](./img/12/05.webp)
+![](../../../static/img/모던%20리액트%20Deep%20Dive/12/05.webp)
 
 ## 작성하고 느낀 점
 좋았던 점: 간단하지 않겠지만 웹 페이지 성능을 최적화 시키는 방법을 알게 되었다.

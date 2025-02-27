@@ -11,12 +11,12 @@ hide_table_of_contents: false
 ## 2. 리엑트 개발 도구 설치
 브라우저에 리엑트 개발 도구를 브라우저 확장 도구로 설치해야 한다. 파이어 폭스를 사용하니 문제가 생겨 크롬으로 진행해야 했다.
 ## 3. 리엑트 개발 도구 활용하기
-![img](./img/comp.webp)
-![img](./img/comp2.webp)
+![img](../../../static/img/모던%20리액트%20Deep%20Dive/comp.webp)
+![img](../../../static/img/모던%20리액트%20Deep%20Dive/comp2.webp)
 ### 1. 컴포넌트
 Components 탭에서는 현재 리엑트 애플리케이션의 컴포넌트 트리를 확인할 수 있다. 단순히 컴포넌트의 구조뿐만 아니라 `props`와 내부 `hooks` 등 다양한 정보를 확인할 수 있다.
 ### 2. 프로파일러
-![img](./img/comp3.webp)
+![img](../../../static/img/모던%20리액트%20Deep%20Dive/comp3.webp)
 #### 1. Flamegraph
 렌더 커밋 별로 어떠한 작업이 일어났는 지 확인 가능하며 너비가 넓을수록 렌더링 시간이 오래 걸렸다는 의미이다.
 #### 2. Ranked

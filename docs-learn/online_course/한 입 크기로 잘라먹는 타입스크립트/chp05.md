@@ -112,7 +112,7 @@ let union4: Union1 = { // ❌
     name: "",
 };
 ```
-![01.webp](img/05/01.webp)
+![01.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/05/01.webp)
 
 ---
 
@@ -144,7 +144,7 @@ let intersection1: Intersection = {
   language: "",
 };
 ```
-![02.webp](img/05/02.webp)
+![02.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/05/02.webp)
 - &의 형태이며, 객체타입에 주로 사용된다.
 
 ---
@@ -254,7 +254,7 @@ let arr = [1, "string"];
 
 
 ## 4. 과제
-![04.webp](img/05/04.webp)
-![03.webp](img/05/03.webp)
+![04.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/05/04.webp)
+![03.webp](../../../static/img/한%20입%20크기로%20잘라먹는%20타입스크립트/05/03.webp)
 
 **출처** : [한 입 크기로 잘라먹는 타입스크립트 - 이정환](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/dashboard)
