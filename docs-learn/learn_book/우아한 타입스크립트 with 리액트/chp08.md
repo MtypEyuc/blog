@@ -1,416 +1,218 @@
 ---
-sidebar_position: 7
-title: "8장 JSX에서 TSX로"
-description: JSX에서 TSX로
+sidebar_position: 8
+title: "12장 타입스크립트 프로젝트 관리"
+description: 타입스크립트 프로젝트 관리
 authors: [MtypEyuc]
 tags: [typescript]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
 
-## 1. 리액트 컴포넌트의 타입
-### 1. 클래스 컴포넌트 타입
+## 1. <span style={{ color: '#ffd33d' }}> 앰비언트 타입 활용하기 </span>
+>### 1. 앰비언트 타입 선언
+자바스크립트에는 타입 정보가 없기 때문에 타입스크립트 외부 라이브러리 사용시 **정의되지 않은 객체 오류**가 발생할 수 있는데, 타입 선언만 할 수 있는 `.d.ts` 확장자를 가진 파일에서 `declare` 키워드를 사용해 컴파일러에 타입스크립트 객체 정보를 미리 제공해 에러를 방지한다.
 
-```ts
-interface Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {}
-class Component<P, S> { }
-class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> { }
-``` 
-생명주기 메서드를 상속받으며  `Props`와 `state`를 제네릭 타입으로 지정해 안정성을 보장한다.
+---
+>### 2. 주의점
+
+- 타입스크립트 라이브러리 사용시 tsconfig.json의 declaration을 true로 설정하면 자동으로 .d.ts 파일을 생성해준다.
 
 
-### 2. 함수 컴포넌트 타입
-```ts
-// 함수 선언을 사용한 방식
-function Welcome(props: WelcomeProps): JSX.Element {}
-```
-````ts
-// 함수 표현식을 사용한 방식 - React.FC 사용
-const Welcome: React.FC<WelcomeProps> = ({ name }) => {};
-````
-````ts
-// 함수 표현식을 사용한 방식 - React.VFC 사용
-const Welcome: React.VFC<WelcomeProps> = ({ name }) => {};
-````
+- 서로 다른 라이브러리에서 동일한 이름의 앰비언트 타입 선언을 하면 충돌이 발생한다.
 
-```ts
-// 함수 표현식을 사용한 방식 - JSX.Element를 반환 타입으로 지정
-const Welcome = ({ name }: WelcomeProps): JSX.Element => {};
-type FC<P = {}> = FunctionComponent<P>;
-interface FunctionComponent<P = {}> {
-// props에 children을 추가
-(props: PropsWithChildren<P>, context?: any): ReactElement <any, any > | null;
-propTypes?: WeakValidationMap<P> | undefined;
-contextTypes?: ValidationMap<any> | undefined;
-defaultProps?: Partial<P> | undefined;
-displayName?: string | undefined;
-}
-type VFC<P = {}> = VoidFunctionComponent<P>;
-interface VoidFunctionComponent<P = {}> {
-// children 없음
-(props : P, context?: any): ReactElement<any, any> | null;
-propTypes?: WeakValidationMap<P> | undefined;
-contextTypes?: ValidationMap<any> | undefined;
-defaultProps?: Partial<P> | undefined;
-displayName?: string | undefined;
-}
-```
-FC 또는 VFC의 형태를 가장 많이 볼 수 있으며 18버전 이후 VFC가 삭제되고 React.FC에서 Children이 사라졌다. React.FC 또는 속성값을 반환해야 사용할 수 있다.
-### 3. Children props 타입 지정
-```ts
-type PropsWithChildren <P> = P & { children?: ReactNode | undefined };
-// example 1 특정 문자열
-type WelcomeProps = {
-children : "천생연분" | "더 귀한 분" | "귀한 분" | "고마운 분";
-};
-// example 2 문자열
-type WelcomeProps = {
-children : string;
-};
-// example 3 JSX요소
-type WelcomeProps = {
-children : ReactElement;
-};
-```
-Children에 대한 타입을 지정할 수 있고, 더 구체적으로 제한하는 것이 가능하다.
-### 4. render 메서드와 함수 컴포넌트의 반환
-#### 1. ReactElement
+
+- 전역에서 사용가능하기 때문에 임포트나 익스포트가 없어 의존 관계가 명확하지 않아 유지보수에 어려움을 겪을 수 있다.
+
+---
+>### 3. 앰비언트 타입 활용하기
+#### 1. 임포트 없이 전역으로 공유
 ```tsx
-interface ReactElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> {
-  type: T;   // 요소의 타입, 예를 들면 'div', 'button', 또는 컴포넌트 이름
-  props: P;  // 해당 요소의 속성(props)
-  key: Key | null;  // 리액트의 리스트 렌더링에서 사용되는 고유 키
+// src/index.d.ts
+type Optional <T extends object , K extends keyof T = keyof T > = Omit <T , K > &
+Partial <Pick<T, K>>;
+// src/components.ts
+type Props = { name: string; age: number; visible: boolean };
+type OptionalProps = Optional <Props >; // Expect : { name ?: string ; age ?: number ; visible ?: boolean; }
+```
+- 앰비언트 타입 선언은 전역 변수와 같은 역할을 한다.
+
+----
+#### 2. declare type 활용하기
+```tsx
+declare type Nullable<T> = T | null;
+const name: Nullable<string> = 'woowa';
+```
+- 커스텀 유틸리티 타입을 declare type으로 선언하여 전역에서 사용할 수 있다.
+
+
+----
+#### 3. declare module 활용하기
+```tsx
+//...
+const theme = {
+fontSizes,
+colors,
+depths
+};
+declare module 'styled-components' {
+type Theme = typeof theme;
+export interface DefaultTheme extends Theme {}
+}
+// 로컬 이미지나 외부 파일
+declare module '*.gif' {
+    const src: string;
+    export default src;
 }
 ```
-리엑트에서 렌더링 가능한 항목을 나타내는 타입이다. JSX로 작성된 요소들이 React.createElement 를 통해 반환된 후 가상 DOM에서 ReactElement 형태로 저장된다.
-#### 2. JSX.Element
+- CSS-in-JS 또는 파일을 모듈로 인식하여 사용할 수 있게 만든다.
+----
+
+#### 4. declare namespace 활용하기
 ```tsx
-declare global {
-  namespace JSX {
-    interface Element extends React.ReactElement<any, any> {}
+  declare namespace NodeJS {
+    interface ProcessEnv {
+    readonly API_URL: string;
+    readonly API_INTERNAL_URL: string ;
+// ...
   }
 }
 ```
-JSX 문법을 사용할 때 필요하며, ReactElement를 상속하고 있기 때문에 동일한 역할을 수행할 수 있다.
-#### 3. ReactNode
-```tsx
-/**
- * @deprecated
- * 현재는 ReactText, ReactChild, ReactFragment 모두 삭제되었다.
- */
-type ReactText = string | number; // 문자열이나 숫자
-type ReactChild = ReactElement | ReactText; // ReactElement 또는 ReactText
-type ReactFragment = {} | Iterable<ReactNode>; // 리액트 조각
-/**
- * 책엔 아래와 같이 정의되어 있지만, 실제 ReactNode 타입 정의 내용도 조금 변경되었다.
- */
-type ReactNode =
-  | ReactChild
-  | ReactFragment
-  | ReactPortal
-  | boolean
-  | null
-  | undefined;
-```
-ReactElement 뿐만 아니라 다양한 타입을 포함할 수 있다. 더 넓은 범위의 타입을 다루기 위해 사용된다.
-### 5. ReactElement, ReactNode, JSX.Element 활용하기
-#### 1. JSX.Element
-```tsx
-interface Props {
-    icon: JSX.Element;
-}
-const Item = ({ icon }: Props) => {
-// prop으로 받은 컴포넌트의 props에 접근할 수 있다
-    const iconSize = icon.props.size;
-    return (<li>{icon}</li>);
-};
-// icon prop에는 JSX.Element 타입을 가진 요소만 할당할 수 있다
-const App = () => {
-    return <Item icon={<Icon size={14} />} />
-};
-```
-icon prop을 JSX.Element 타입으로 선언함으로써 해당 prop에는 JSX 문법만 삽입할 수 있다. 또한 icon.props에 접근하여 prop으로 넘겨받은 컴포넌트의 상세한 데이터를 가져올 수 있다.
-#### 2. ReactElement
-```tsx
-interface IconProps {
-    size: number;
-}
-interface Props {
-// ReactElement의 props 타입으로 IconProps 타입 지정
-    icon: React.ReactElement<IconProps>;
-}
-const Item = ({ icon }: Props) => {
-// icon prop으로 받은 컴포넌트의 props에 접근하면, props의 목록이 추론된다
-    const iconSize = icon.props.size;
-    return <li>{icon}</li>;
-};
-```
-원하는 컴포넌트의 props를 ReactElement의 제네릭으로 지정해줄 수 있다.
-#### 3. ReactNode
-```tsx
-interface MyComponentProps {
-    children?: React.ReactNode;
-// ...
-}
-```
-컴포넌트가 렌더링 할 수 있는 어떤 타입의 속성값이든 받을 수 있게 만들 수 있다.
-```tsx
-type PropsWithChildren<P = unknown> = P & {
-    children?: ReactNode | undefined;
-};
-interface MyProps {
-// ...
-}
-type MyComponentProps = PropsWithChildren<MyProps>;
-```
-이런 식으로 컴포넌트가 다양한 형태를 가질 수 있게 하고 싶을 때 사용된다.
+- .nev 파일을 사용할 때 설정값을 전역으로 사용할 수 있게 만든다.
 
-## 2. 타입스크립트로 리액트 컴포넌트 만들기
-공통 컴포넌트에 어떤 타입의 속성이 제공되어야 하는지 알려주며, 필수 속성이 없는 경우 에러를 발생시켜 유지보수 과정에서의 실수를 사전에 막을 수 있다.
-### 1. JSX로 구현된 Select 컴포넌트  
-```jsx
-const Select = ({ onChange, options, selectedOption }) => {
-const handleChange = (e) => {
-const selected = Object.entries(options)
-.find(([_, value]) => value === e.target.value)?.[0];
-onChange ?.(selected);
-};
-return (
-<select
-onChange ={handleChange}
-value ={selectedOption && options[selectedOption]}
->
-{Object.entries(options).map(([key, value]) => (
-<option key={key} value={value}>
-{value}
-</option>
-))}
-</select>
-);
-};
-```
-해당 코드에서 속성 값으로 어떤 타입을 전달해야 할지 명확히 알 수 없기 때문에 추가적인 설명이 필요하다.
-### 2. JSDocs로 일부 타입 지정하기
-```js
-/**
-* Select 컴포넌트
-* @param {Object} props - Select 컴포넌트로 넘겨주는 속성
-* @param {Object} props.options - { [key: string]: string } 형식으로 이루어진 option 객
-체
-* @param {string | undefined } props .selectedOption - 현재 선택된 option의 key값
-(optional)
-* @param {function} props.onChange - select 값이 변경되었을 때 불리는 callBack 함수
-(optional)
-* @returns {JSX.Element}
-*/
-```
-JSDocs를 활용하면 각 속성의 대략적인 타입과 어떤 역할을 하는지 파악할 수 있지만,options가 어떤 형식의 객체를 나타내는지나 onChange의 매개변수 및 반환 값에 대한 구체적인 정보를 알기 쉽지 않아서 잘못된 타입이 전달될 수 있는 위험이 존재한다
-### 3. props 인터페이스 적용하기
+----
+#### 5. declare global 활용하기
 ```tsx
-type Option = Record <string, string>; // {[key : string]: string}
-interface SelectProps {
-options: Option;
-selectedOption?: string ;
-onChange?: (selected?: string) => void;
+declare global {
+    interface Window {
+        webkit?: {
+            messageHandlers?: Record<
+                string,
+                {
+                    postMessage?: (parameter: string) => void;
+                }
+            >;
+        };
+    }
 }
-const Select = ({ options, selectedOption, onChange }: SelectProps): JSX.Element =>{
-    //...
-};
 ```
-컴포넌트에 타입을 정의할 수 있으며, 각 속성에 타입을 명확하게 정의하고 옵셔널 프로퍼티를 사용해 부모에게 onChange 속성을 받지 못해도 유연하게 사용할 수 있다.
-### 4.  리액트 이벤트
-리액트는 가상 DOM을 다루면서 이벤트도 별도로 관리한다. 리액트 컴포넌트(노드)에 등록되는 이벤트 리스너는 onClick, onChange 처럼 카멜 케이스로 표기한다.
+- 전역 변수인 Window 객체에 자동완성 기능을 추가해 실수를 줄일 수 있다.
+----
+>### 4. declare와 번들러의 시너지
+전역 변수 선언을 통해 컴파일러에 정보를 알려주지만, 실제 데이터는 존재하지 않기 때문에 번들 시점에 추가하는 방식으로 안전하게 사용할 수 있다.
 ```tsx
-type EventHandler<Event extends React.SyntheticEvent> = (e: Event) => void | null;
-type ChangeEventHandler = EventHandler<ChangeEvent<HTMLSelectElement>>;
-const eventHandler1: GlobalEventHandlers["onchange"] = (e) => {
-e.target; // 일반 Event는 target이 없음
-};
-const eventHandler2: ChangeEventHandler = (e) => {
-e.target; // 리액트 이벤트(합성 이벤트)는 target이 있음
-};
-```
-```tsx
-const handleChange : React.ChangeEventHandler<HTMLSelectElement> = (e) => {
-const selected = Object.entries (options).find(
-([_, value]) => value === e.target.value
-)?.[0];
-onChange?.(selected);
-};
-```
-### 5.  훅에 타입 추가하기
-```tsx
-const fruits = {
-    apple: '사과',
-    banana: '바나나',
-    blueberry: '블루베리',
-};
+// data.ts
+export const color = {
+    white: "#ffffff",
+    black: "#000000",
+} as const;
 
-type Fruit = keyof typeof fruits;
-const FruitSelect: VFC = () => {
-    const [fruit, changeFruit] = useState<string | undefined>();
-    return (
-        <Select
-            // Error - SetStateAction<undefined>와 맞지 않음
-            // (changeFruit에는 undefined만 매개변수로 넘길 수 있음)
-            onChange={changeFruit}
-            options={fruits}
-            selectedOption={fruit}
-        />
-    );
-}
-// 에러 발생
-const func = () => {
-    changeFruit('orange');
-};
-```
-`keyof typeof obj`를 사용해 fruits 키값만 추출해서 Fruit라는 타입을 새로 만들었다. 해당 타입을 제네릭으로 활용해 다른 값이 할당되면 에러가 발생한다.
-### 6. 제네릭 컴포넌트 만들기
-위의 코드에서 제한된 키와 값을 가지게 만들기 위해 제네릭을 사용한 컴포넌트를 만들어야 한다.
-```tsx
-interface SelectProps<OptionType extends Record<string, string>> {
-options: OptionType;
-selectedOption?: keyof OptionType;
-onChange?: (selected?: keyof OptionType ) => void;
-}
-const Select = <OptionType extends Record<string, string>>({
-options,
-selectedOption,
-onChange,
-}: SelectProps<OptionType>) => {
-// Select component implementation
-};
-```
-객체 형식의 타입을 받아 해당 객체의 키값을selectedOption, onChange의 매개변수에만 적용하도록 만든 예시이다.
-```tsx
-const fruits = {
-    apple: '사과',
-    banana: '바나나',
-    blueberry: '블루베리',
-};
-const FruitSelect: VFC = () => {
-// ...
-// <Select<Fruit > ... />으로 작성해도 되지만, 넘겨주는 props의 타입으로 타입 추론을 해줍니다
-// Type Error - Type “orange ” is not assignable to type “apple ” | “banana ” |'blueberry' | undefined
-return (
-<Select options={fruits} onChange={changeFruit} selectedOption='orange' />
-);
-};
-```
-Select 컴포넌트에 전달되는 props의 타입 기반으로 타입이 추론되어`<Select<추론된 타입>>` 형태의 컴포넌트가 생성된다.
-### 7. HTMLAttributes, ReactProps 적용하기
-```tsx
-type ReactSelectProps = React.ComponentPropsWithoutRef<'select'>;
-interface SelectProps<OptionType extends Record<string, string>> {
-id?: ReactSelectProps['id'];
-className?: ReactSelectProps['className'];
-// ...
-}
-```
-`React.ComponentPropsWithoutRef`를 통해 select의 props를 추출한다. `ReactSelectProps` 타입을 설정해 엘리면트에서 속성의 타입을 그대로 가져온다.
+// type.ts
+import { color } from "./data";
+type ColorSet = typeof color;
+declare global {
+    const _color: ColorSet;
 
-```tsx
-interface SelectProps<OptionType extends Record<string, string>> 
-  extends Pick<ReactSelectProps, 'id' | 'key' >
-{
-  // ...
 }
-```
- `Pick<Type, ‘key1’ | ‘key2’ ...>`는 객체 형식의 타입에서 key1, key2...의 속성만 추출하여 새로운 객체 형식의 타입을 반환한다. 여러 개의 타입을 가져와야 할 때 사용된다.
-### 8. styled-components를 활용한 스타일 정의
-CSS-in-JS 라이브러리인 styled-components를 사용해 직접 스타일을 적용할 수 있다.
-```tsx
-export const theme = {
-    fontSize: {
-        default: "16px",
-        small: "14px",
-        large: "18px",
+// rollup.config.js
+import inject from "@rollup/plugin-inject";
+import typescript from "@rollup/plugin-typescript";
+
+export default [
+    {
+        input: "index.ts",
+        output: [
+            {
+                dir: "lib",
+                format: "esm",
+            },
+        ],
+        plugins: [
+            typescript(),
+            inject({
+                _color: ["./data", "color"], // _color를 data.ts의 color로 주입
+            }),
+        ],
     },
-    color: {
-        white: "#FFFFFF",
-        black: "#000000",
-    },
-};
-
-type Theme = typeof theme;
-export type FontSize = keyof Theme["fontSize"];
-export type Color = keyof Theme["color"];
+];
 ```
-```tsx
-interface SelectStyleProps {
-color: Color;
-fontSize: FontSize;
-}
-const StyledSelect = styled.select<SelectStyleProps>`
-color: ${({ color }) => theme.color[color]};
-font-size: ${({ fontSize }) => theme.fontSize [fontSize]};
-`;
+
+---
+## 2. <span style={{ color: '#ffd33d' }}> 스크립트와 설정파일 활용하기 </span>
+>### 1. 스크립트 활용으로 실시간 타입검사
 ```
-```tsx
-interface SelectProps extends Partial<SelectStyleProps> {
-// ...
-}
-const Select = <OptionType extends Record<string, string>>({
-                                                               fontSize = 'default',
-color = 'black',
-// ...
-}: SelectProps<OptionType>) => {
-// ...
-    return (
-        <StyledSelect
-// ...
-fontSize={fontSize}
-color={color}
-// ...
-/>
-);
-};
+yarn tsc --noEmit --incremental -w
+
+-  noEmit: 자바스크립트로 된 출력 파일을 생성하지 않도록 설정
+-  incremental: 증분 컴파일을 활성화하여 컴파일 시간을 단
+-  w: 파일 변경 사항을 모니터링
+
+npx type-coverage --detail 
+
+- 프로젝트 전체에서 타입을 제대로 사용하고 있는지 확인할 수 있다.
 ```
-### 9. 공변성과 반공변성
-안전한 타입 가드를 위해서는 특수한 경우를 제외하고는 일반적으로 반공변적인 함수 타입을 설정하는 것이 권장된다. **함수 선언 형식을 사용하면 공변성을 띄고 화살표 함수로 선언하면 반공변성을 띈다.** 
-#### 1. 공변성
-출력값에 적용되며,상위 타입이 하위 타입으로 대체될 수 있다는 개념이다. 구체적인 타입이 넓은 타입으로 반환될 수 있다.
-```ts
-interface Box<out T> {  // out: 공변성
-  value: T;
-}
+- 이 스크립트는 프로젝트의 타입 스크립트 컴파일러를 실행한다.
 
-// Box<string>은 Box<Animal>을 대체할 수 있다
-class Animal {}
-class Dog extends Animal {}
+---
+>### 2. 설정 파일 활용으로 컴파일 속도 올리기
+``` tsx
+// tsconfig에 추가
 
-const animalBox: Box<Animal> = { value: new Animal() };
-const dogBox: Box<Dog> = { value: new Dog() };
-
-// Box<Dog>는 Box<Animal>에 할당될 수 있다.
-const anotherAnimalBox: Box<Animal> = dogBox;
+    {
+    "compilerOptions": {
+    ...
+    incremental: true
+    }
+ }
+ 
+// yarn tsc --noEmit --incremental --diagnostic 과 같음.
 ```
-- T의 하위 타입 S가 있을 때, `Box<T>는` `Box<S>`로 교환 가능해진다.
-#### 2. 반공변성
-입력값(인자)에 적용되며, 상위 타입이 하위 타입으로 대체될 수 없다는 개념이다. 더 넓은 타입을 좁은 타입으로 처리할 수 없다.
-```ts
-interface Handler<in T> {  // in: 반공변성
-  handle(value: T): void;
-}
 
-// Handler<Dog>는 Handler<Animal>을 대체할 수 없다
-class Animal {}
-class Dog extends Animal {}
+----
 
-const animalHandler: Handler<Animal> = { handle: (value: Animal) => {} };
-const dogHandler: Handler<Dog> = { handle: (value: Dog) => {} };
+## 3. <span style={{ color: '#ffd33d' }}> 타입스크립트 마이그레이션 </span>
+기존 프로젝트를 마이그레이션 하는 것 보다 새로 설계해 프로젝트를 구축하는 것이 더 효율적일 수 있다. 비즈니스 요구 사항과 프로젝트 특성을 고려해 마이그레이션 여부를 신중하게 결정해야 한다.
 
-// 반공변성: Handler<Dog>는 Handler<Animal>에 할당할 수 없다
-// const anotherAnimalHandler: Handler<Animal> = dogHandler; // 오류 발생
-```
-- T의 하위 타입 S가 있을 때, `Handler<S`>는 `Handler<T>`로 교환할 수 없다.
+---
+> ### 1. 점진적인 마이그레이션
+프로젝트의 규모가 큰 경우 참여자와 함께 우선순위를 설정해 작은 부분부터 점진적으로 진행하는 것이 좋다. 
 
-## 작성하고 느낀 점
+---
+>### 2.  마이그레이션 진행하기
+1. 타입스크립트 개발환경 설정 후 빌드 파이프라인에 컴파일러를 통합한다.
 
-좋았던 점: ReactDeepDive 1장에서 단편적으로 타입스크립트를 리액트에 적용하는 방법을 배웠었는데 더 깊이있는 내용인 컴포넌트와 요소에 타입을 적용하고 특정 타입만을 가져오게 하거나 안전하게 받아오는 방법을 배웠다.
 
-배운 점: 리액트에서 타입스크립트를 적용하는 방법에 대해 배웠다.
 
-아쉬운 점: 내용을 압축한 형태라 예제를 보고 바로 이해할 수 없다. 이해를 돕기 위한 외부 자료를 찾는 데 시간을 소모했다.
+2. tsconfig.json 파일에서 allowJS를 true로 noImplicitAny를 false로 설정한다.
 
-향후 계획: 9장 10장 11장은 ReactDeepDive에서 더 자세하게 다뤘으니 12장 타입스크립트 프로젝트 관리 파트로 진행한다.
+
+
+3. 작성된 자바스크립트 파일을 타입스크립트 파일로 변환한다. 필요한 타입과 인터페이스를 하나씩 정의하며 함수 시그니처를 추가해나간다.
+
+
+
+4. 작업이 완료되었다면 tsconfig.json 파일에서 allowJS를 false로 변경하고, noImplicitAny를 true로 설정한다.
+
+----
+## 4. <span style={{ color: '#ffd33d' }}> 모노레포 </span>
+>### 1. 장점
+여러 프로젝트를 하나의 레포지토리로 통합해 관리해 불필요한 코드 중복을 줄인다. 모듈 관리 시 별도의 관리가 필요 없어 의존성 관리를 쉽게 할 수 있다.
+
+---
+>### 2.단점
+시간의 흐름에 따라 레포지토리가 거대해질 수 있으며, 이해관계에 의해 소유권과 권한 관리가 복잡해질 수 있으므로 모듈의 소유권을 명확히 정의하고 규칙을 설정해야 하는 과정이 별도로 필요하다.
+
+----
+
+## <span style={{ color: '#ffd33d' }}> 작성 후기 </span>
+
+1. 좋았던 점: 설정에 사용되는 속성값을 전역으로 사용하면 편리할 수 있다는 것을 알게되었다.
+
+
+2. 배운 점: 타입 선언한 객체를 전역으로 사용하는 방법에 대해 배웠다.
+
+
+3. 아쉬운 점: CSS 같은 경우 TailWind를 사용하고 타입스크립트 설정도 대부분 자동완성을 지원하기 때문에 전역으로 API를 관리하지 않는 이상 사용하기 힘들 것 같다.
+
+
+4. 향후 계획: declare는 타입만 정의하고 실제 구현은 다른 곳에서 처리할 때 사용하기 때문에 외부 라이브러리를 사용해 처리하는 예시를 살펴보아야 할 것이다.
+

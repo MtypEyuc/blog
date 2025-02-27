@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: "3장: 고급 타입"
 description: 고급 타입
 authors: [MtypEyuc]

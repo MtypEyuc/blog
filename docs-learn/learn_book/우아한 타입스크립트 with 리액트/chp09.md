@@ -1,5 +1,5 @@
 ---
-sidebar_position: 13
+sidebar_position: 9
 title: "13장 타입스크립트와 객체 지향"
 description: 책을 전부 읽었다.
 authors: [MtypEyuc]

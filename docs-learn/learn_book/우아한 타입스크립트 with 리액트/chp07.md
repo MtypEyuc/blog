@@ -1,472 +1,416 @@
 ---
 sidebar_position: 7
-title: "7장 비동기 호출"
-description: 비동기 호출
+title: "8장 JSX에서 TSX로"
+description: JSX에서 TSX로
 authors: [MtypEyuc]
 tags: [typescript]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
 
-## 1. API 요청
-리액트의 `fetch` 라이브러리를 이용해 데이터를 호출할 수 있지만 간결한 작성이 가능한 `Axios` 라이브러리를 주로 사용한다.
-### 1. Axios 활용하기
-- `apiRequester`를 사용해 서로 다른 API Entry 관리
-```typescript
-import apiRequester from "./apiRequester";
+## 1. 리액트 컴포넌트의 타입
+### 1. 클래스 컴포넌트 타입
 
-async function fetchPosts() {
-    try {
-        const response = await apiRequester.get("/posts");
-        console.log(response.data);
-    } catch (error) {
-        console.error("API 요청 실패:", error);
-    }
-}
+```ts
+interface Component<P = {}, S = {}, SS = any> extends ComponentLifecycle<P, S, SS> {}
+class Component<P, S> { }
+class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> { }
+``` 
+생명주기 메서드를 상속받으며  `Props`와 `state`를 제네릭 타입으로 지정해 안정성을 보장한다.
 
-async function createPost() {
-    try {
-        const response = await apiRequester.post("/posts", {
-            title: "New Post",
-            body: "This is a new post",
-            userId: 1
-        });
-        console.log("생성된 데이터:", response.data);
-    } catch (error) {
-        console.error("API 요청 실패:", error);
-    }
-}
 
-fetchPosts();
-createPost();
+### 2. 함수 컴포넌트 타입
+```ts
+// 함수 선언을 사용한 방식
+function Welcome(props: WelcomeProps): JSX.Element {}
 ```
-### 2. Axios 인터셉터 사용하기
-특정 요청 방식에서 조건문을 주어 처리할 수 있다.
-```typescript
-import axios from "axios";
+````ts
+// 함수 표현식을 사용한 방식 - React.FC 사용
+const Welcome: React.FC<WelcomeProps> = ({ name }) => {};
+````
+````ts
+// 함수 표현식을 사용한 방식 - React.VFC 사용
+const Welcome: React.VFC<WelcomeProps> = ({ name }) => {};
+````
 
-const apiRequester = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
-  timeout: 5000,
-  headers: { "Content-Type": "application/json" }
-});
-
-apiRequester.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-
-apiRequester.interceptors.response.use(
-  (response) => {
-    return response.data;
-  },
-  (error) => {
-    console.error("API 요청 실패:", error.response?.data || error.message);
-    return Promise.reject(error);
-  }
-);
-
-export default apiRequester;
+```ts
+// 함수 표현식을 사용한 방식 - JSX.Element를 반환 타입으로 지정
+const Welcome = ({ name }: WelcomeProps): JSX.Element => {};
+type FC<P = {}> = FunctionComponent<P>;
+interface FunctionComponent<P = {}> {
+// props에 children을 추가
+(props: PropsWithChildren<P>, context?: any): ReactElement <any, any > | null;
+propTypes?: WeakValidationMap<P> | undefined;
+contextTypes?: ValidationMap<any> | undefined;
+defaultProps?: Partial<P> | undefined;
+displayName?: string | undefined;
+}
+type VFC<P = {}> = VoidFunctionComponent<P>;
+interface VoidFunctionComponent<P = {}> {
+// children 없음
+(props : P, context?: any): ReactElement<any, any> | null;
+propTypes?: WeakValidationMap<P> | undefined;
+contextTypes?: ValidationMap<any> | undefined;
+defaultProps?: Partial<P> | undefined;
+displayName?: string | undefined;
+}
 ```
-### 3. 빌더 패턴
-코드가 복잡한 경우 객체 생성 과정을 단순화 하여 가독성을 높일 수 있다. 필요한 설정값을 추가하거나 상황에 맞게 사용할 수 있지만 기본 요청 함수가 반복적으로 사용될 수 있디.
-```typescript
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
-class APIBuilder {
-  private url!: string;
-  private method: "get" | "post" | "put" | "delete" = "get";
-  private headers: Record<string, string> = {};
-  private params: Record<string, any> = {};
-  private data: any = null;
-
-  setUrl(url: string) {
-    this.url = url;
-    return this; // 메서드 체이닝
-  }
-
-  setMethod(method: "get" | "post" | "put" | "delete") {
-    this.method = method;
-    return this;
-  }
-
-  setHeaders(headers: Record<string, string>) {
-    this.headers = headers;
-    return this;
-  }
-
-  setParams(params: Record<string, any>) {
-    this.params = params;
-    return this;
-  }
-
-  setBody(data: any) {
-    this.data = data;
-    return this;
-  }
-
-  async send<T = any>(): Promise<AxiosResponse<T>> {
-    const config: AxiosRequestConfig = {
-      url: this.url,
-      method: this.method,
-      headers: this.headers,
-      params: this.params,
-      data: this.data,
-    };
-
-    return axios(config);
-  }
-}
-
-async function fetchData() {
-  try {
-    const response = await new APIBuilder()
-      .setUrl("https://jsonplaceholder.typicode.com/posts")
-      .setMethod("get")
-      .setHeaders({ "Content-Type": "application/json" })
-      .send();
-
-    console.log("Response Data:", response.data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-fetchData();
-```
-### 4. API 응답 타입 지정하기
-같은 서버에서 오는 응당 형태는 대체로 통일된 형태이기 때문에 하나의 `Response` 타입으로 묶을 수 있다.
-```typescript
-interface Response<T> {
-    data: T;
-    status: string;  
-    serverDateTime: string;  
-    errorCode?: string;  
-    errorMessage?: string;  
-}
-
-interface FetchCartResponse {
-    cartItems: CartItem[];
-}
-
-interface PostCartRequest {
-    itemId: number;
-    quantity: number;
-}
-
-interface PostCartResponse {
-    cartItems: CartItem[];
-}
-
-const fetchCart = (): AxiosPromise<Response<FetchCartResponse>> =>
-    apiRequester.get<Response<FetchCartResponse>>("cart");
-
-const postCart = (postCartRequest: PostCartRequest): AxiosPromise<Response<PostCartResponse>> =>
-    apiRequester.post<Response<PostCartResponse>>("cart", postCartRequest);
-```
-- `UPDATE`나 `CREATE`같이 응답이 없을 수 있는 `API`를 관리해야 한다.
-```typescript
-const updateCart = (updateCartRequest: any): AxiosPromise<Response<unknown>> =>
-    apiRequester.put<Response<unknown>>("cart", updateCartRequest);
-```
-- `Response` 타입은 `apiRequester`가 모르게 관리되어야 한다. 요청 처리 로직이 구현체와 별개로 독립적으로 관리되어야 한다는 뜻이다. 알 수 없는 데이터를 사용할 땐 `unknown` 타입을 사용해 관리한다.
-```typescript
-interface Response {
-  data: {
-    cartItems: CartItem[];
-    forPass: unknown;  // 알 수 없는 값
-  };
-}
-
-// `forPass`의 값을 사용할 때 타입을 확인하여 사용해야 안전함
-type ForPass = {
-  type: "A" | "B" | "C";
+FC 또는 VFC의 형태를 가장 많이 볼 수 있으며 18버전 이후 VFC가 삭제되고 React.FC에서 Children이 사라졌다. React.FC 또는 속성값을 반환해야 사용할 수 있다.
+### 3. Children props 타입 지정
+```ts
+type PropsWithChildren <P> = P & { children?: ReactNode | undefined };
+// example 1 특정 문자열
+type WelcomeProps = {
+children : "천생연분" | "더 귀한 분" | "귀한 분" | "고마운 분";
 };
-
-const isTargetValue = (data: Response["data"]) => {
-  const forPass = data.forPass as ForPass;  
-  return forPass.type === "A";
+// example 2 문자열
+type WelcomeProps = {
+children : string;
 };
-
-// `forPass`가 어떤 타입인지는 알 수 없지만, 사용할 때 타입 검사를 통해 안전하게 처리
-```
-### 5. View Model 사용하기
-- 사용 전: 데이터를 변환하지 않고 그대로 가져와 API 데이터가 변경되면 문제가 생길 수 있다.
-```typescript
-interface ListResponse {
-  items: ListItem[];
-}
-
-const fetchList = async (filter?: ListFetchFilter): Promise<ListResponse> => {
-  const { data } = await apiRequester
-    .params({ ...filter })
-    .get('/apis/get-list-summaries')
-    .call<Response<ListResponse>>();
-
-  return { data };
+// example 3 JSX요소
+type WelcomeProps = {
+children : ReactElement;
 };
 ```
-- 사용 후: 데이터 변경이 일어나더라도 재가공을 통해 사용이 가능하다. 요청에 따른 타입 관리가 필요하기 때문에 `API`가 많아질수록 복잡도가 증가한다.
-```typescript
-interface JobListItemResponse {
-  name: string;
-}
-
-interface JobListResponse {
-  jobItems: JobListItemResponse[];
-}
-
-class JobList {
-  readonly totalItemCount: number;
-  readonly items: JobListItemResponse[];
-
-  constructor({ jobItems }: JobListResponse) {
-    this.totalItemCount = jobItems.length;
-    this.items = jobItems;
-  }
-}
-
-const fetchJobList = async (
-  filter?: ListFetchFilter
-): Promise<JobListResponse> => {
-  const { data } = await apiRequester
-    .params({ ...filter })
-    .get('/apis/get-list-summaries')
-    .call<Response<JobListResponse>>();
-
-  return new JobList(data);
-};
-```
-### 6. Superstruct 활용하기
-서버에서 받아온 데이터가 예상한 형식과 맞는지 데이터 유효성을 검사하는 도구이다.
-```typescript
-import { assert } from 'superstruct';
-
-interface ListItem {
-    id: string;
-    content: string;
-}
-
-interface ListResponse {
-    items: ListItem[];
-}
-const fetchList = async (filter?: ListFetchFilter): Promise<ListResponse> => {
-    const { data } = await api
-        .params({ ...filter })
-        .get("/apis/get-list-summaries")
-.call<Response<ListResponse>>();
-    return { data };
-};
-//배열 목록을 가져와 검증
-function isListItem(listItems: ListItem[]) {
-    listItems.forEach((listItem) => assert(listItem, ListItem));
-}
-```
-## 2. API 상태 관리하기
-### 1. 상태 관리 라이브러리에서 호출하기
-전역 상태 관리 라이브러리에서 비동기 `API`의 호출 상태를 관리하고 데이터 변화를 추적할 수 있다.
-- `redux`: 미들웨어를 사용해 예측 가능한 방식으로 데이터를 엄격하고 일관성 있게 관리할 수 있다. `API`가 많아지면 그만큼 상태 관리 함수도 늘어나는 단점이 있다.
-- `MobX`: 복잡한 `redux`의 단점을 보완하기 위해 직관적이고 유연한 방식으로 데이터를 관리한다. 여러 개의 컴포넌트 참조시 불필요한 리렌더링이 발생할 수 있다.
-### 2. 훅으로 호출하기
-사용이 간단하고 직관적이며 외부 의존성이 낮다. 하지만 중복 코드가 많아지고, 데이터를 전역으로 관리해야 할 때 그 과정이 더욱 복잡해진다.
-## 3. API 에러 핸들링
-### 1. 에러 바운더리
-자식 컴포넌트에서 발생한 오류를 처리할 수 있는 고차 컴포넌트다. 애플리케이션 전체가 다운되지 않고 오류 메세지를 표시할 수 있다. 
+Children에 대한 타입을 지정할 수 있고, 더 구체적으로 제한하는 것이 가능하다.
+### 4. render 메서드와 함수 컴포넌트의 반환
+#### 1. ReactElement
 ```tsx
-import React, { useState, useEffect } from 'react';
-
-function useErrorBoundary() {
-    const [hasError, setHasError] = useState(false);
-
-    const catchError = (error: Error) => {
-        setHasError(true);
-        console.error(error);
-    };
-
-    return {
-        hasError,
-        catchError,
-    };
+interface ReactElement<P = any, T extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>> {
+  type: T;   // 요소의 타입, 예를 들면 'div', 'button', 또는 컴포넌트 이름
+  props: P;  // 해당 요소의 속성(props)
+  key: Key | null;  // 리액트의 리스트 렌더링에서 사용되는 고유 키
 }
-
-// 함수형 컴포넌트에서 사용하기
-const ErrorBoundaryWithHook = ({ children }: { children: React.ReactNode }) => {
-    const { hasError, catchError } = useErrorBoundary();
-
-    useEffect(() => {
-        const handleError = (event: any) => {
-            if (event.error) {
-                catchError(event.error);
-            }
-        };
-        window.addEventListener('error', handleError);
-        return () => window.removeEventListener('error', handleError);
-    }, []);
-
-    if (hasError) {
-        return <div>Something went wrong.</div>;
-    }
-
-    return <>{children}</>;
+```
+리엑트에서 렌더링 가능한 항목을 나타내는 타입이다. JSX로 작성된 요소들이 React.createElement 를 통해 반환된 후 가상 DOM에서 ReactElement 형태로 저장된다.
+#### 2. JSX.Element
+```tsx
+declare global {
+  namespace JSX {
+    interface Element extends React.ReactElement<any, any> {}
+  }
+}
+```
+JSX 문법을 사용할 때 필요하며, ReactElement를 상속하고 있기 때문에 동일한 역할을 수행할 수 있다.
+#### 3. ReactNode
+```tsx
+/**
+ * @deprecated
+ * 현재는 ReactText, ReactChild, ReactFragment 모두 삭제되었다.
+ */
+type ReactText = string | number; // 문자열이나 숫자
+type ReactChild = ReactElement | ReactText; // ReactElement 또는 ReactText
+type ReactFragment = {} | Iterable<ReactNode>; // 리액트 조각
+/**
+ * 책엔 아래와 같이 정의되어 있지만, 실제 ReactNode 타입 정의 내용도 조금 변경되었다.
+ */
+type ReactNode =
+  | ReactChild
+  | ReactFragment
+  | ReactPortal
+  | boolean
+  | null
+  | undefined;
+```
+ReactElement 뿐만 아니라 다양한 타입을 포함할 수 있다. 더 넓은 범위의 타입을 다루기 위해 사용된다.
+### 5. ReactElement, ReactNode, JSX.Element 활용하기
+#### 1. JSX.Element
+```tsx
+interface Props {
+    icon: JSX.Element;
+}
+const Item = ({ icon }: Props) => {
+// prop으로 받은 컴포넌트의 props에 접근할 수 있다
+    const iconSize = icon.props.size;
+    return (<li>{icon}</li>);
 };
-
-// 에러 발생 컴포넌트
-const ProblematicComponent = () => {
-    throw new Error('Error in ProblematicComponent!');
-    return <div>This will not render.</div>;
-};
-
-
+// icon prop에는 JSX.Element 타입을 가진 요소만 할당할 수 있다
 const App = () => {
-    return (
-        <div>
-            <h1>App with Error Boundary using Hooks</h1>
-            <ErrorBoundaryWithHook>
-                <ProblematicComponent />
-            </ErrorBoundaryWithHook>
-        </div>
-    );
+    return <Item icon={<Icon size={14} />} />
 };
-
-export default App;
 ```
-### 2. react-query
-`useQuery`와 같은 훅을 통해 `API` 요청을 하고, `data, isLoading, isError, error, isSuccess, isFetching, status, refetch` 등의 상태값을 반환한다.
-[(useQuery)](https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)
+icon prop을 JSX.Element 타입으로 선언함으로써 해당 prop에는 JSX 문법만 삽입할 수 있다. 또한 icon.props에 접근하여 prop으로 넘겨받은 컴포넌트의 상세한 데이터를 가져올 수 있다.
+#### 2. ReactElement
 ```tsx
-import { useQuery } from 'react-query';
-
-// API 호출 함수
-const fetchData = async () => {
-  const response = await fetch('/api/data');
-  if (!response.ok) {
-    throw new Error('API 요청 실패');
-  }
-  return response.json();
-};
-
-const MyComponent = () => {
-  const { data, isLoading, isError, error, isSuccess } = useQuery('data', fetchData);
-
-  // 로딩 중일 때
-  if (isLoading) return <div>로딩 중...</div>;
-
-  // 에러가 발생한 경우
-  if (isError) return <div>에러 발생: {error.message}</div>;
-
-  // 요청이 성공했을 때
-  if (isSuccess) return <div>성공적으로 데이터를 가져왔습니다: {JSON.stringify(data)}</div>;
-
-  return null;
+interface IconProps {
+    size: number;
+}
+interface Props {
+// ReactElement의 props 타입으로 IconProps 타입 지정
+    icon: React.ReactElement<IconProps>;
+}
+const Item = ({ icon }: Props) => {
+// icon prop으로 받은 컴포넌트의 props에 접근하면, props의 목록이 추론된다
+    const iconSize = icon.props.size;
+    return <li>{icon}</li>;
 };
 ```
-## 4. API 모킹
-테스트 데이터를 호출해 각종 시나리오에 따른 테스트를 진행한다.
-### 1. JSON 파일 
-```typescript
-import axios from 'axios';
-
-const fetchData = async () => {
-  try {
-    const response = await axios.get('/api/data'); 
-    console.log('Fetched data:', response.data); 
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
-
-fetchData();
-```
-### 2. NextApiHandler
-파일 경로로 요청 가능하고 파일을 불러오는 중간 과정에서 응답 처리 로직을 추가할 수 있다.
-```typescript
-// api/mock/brand
-import { NextApiHandler } from "next";
-
-const BRANDS: Brand[] = [
- {
-  id: 1,
-  label: "배민스토어",
- },
- {
-  id: 2,
-  label: "비마트",
- },
-];
-
-const handler: NextApiHandler = (req, res) => {
-
- res.json(BRANDS);
-};
-
-export default handler;
-```
-```typescript
-const fetchBrands = async () => {
-  const response = await fetch("/api/mock/brand");
-  const data = await response.json();
-  console.log(data);
-};
-
-fetchBrands();
-```
-### 3. API 요청 핸들러에 분기 추가
-필요한 경우에만 API 요청을 하게 만드는 조건문을 추가하는 방식.
-### 4. axios-mock-adapter로 모킹
-요청 함수에 분기를 추가하지 않고 만들 수 있다. 시나리오에 따른 처리가 가능하다.
-```typescript
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
-
-// 1️⃣ Axios 인스턴스 생성
-const api = axios.create({
-  baseURL: "https://api.example.com",
-});
-
-// 2️⃣ axios-mock-adapter 인스턴스 생성
-const mock = new MockAdapter(api);
-
-// 3️⃣ GET 요청을 가짜 데이터로 응답
-mock.onGet("/users").reply(200, {
-  users: [{ id: 1, name: "John Doe" }],
-});
-
-// 4️⃣ 실제 API 호출 (하지만 mock 데이터가 반환됨)
-api.get("/users").then((response) => {
-  console.log(response.data);
-});
-```
-### 5. 목업 사용 여부 제어
-지정 서버 환경에서 요청을 가로채는 방식으로 테스트 한다. 
-```typescript
-const isDev = process.env.NODE_ENV === "development";
-
-if (isDev) {
-  const mock = new MockAdapter(api);
-
-  mock.onGet("/products").reply(200, {
-    products: [{ id: 101, name: "테스트 상품" }],
-  });
-
-  console.log("✅ 개발 모드에서 Mock API 활성화");
+원하는 컴포넌트의 props를 ReactElement의 제네릭으로 지정해줄 수 있다.
+#### 3. ReactNode
+```tsx
+interface MyComponentProps {
+    children?: React.ReactNode;
+// ...
 }
 ```
+컴포넌트가 렌더링 할 수 있는 어떤 타입의 속성값이든 받을 수 있게 만들 수 있다.
+```tsx
+type PropsWithChildren<P = unknown> = P & {
+    children?: ReactNode | undefined;
+};
+interface MyProps {
+// ...
+}
+type MyComponentProps = PropsWithChildren<MyProps>;
+```
+이런 식으로 컴포넌트가 다양한 형태를 가질 수 있게 하고 싶을 때 사용된다.
+
+## 2. 타입스크립트로 리액트 컴포넌트 만들기
+공통 컴포넌트에 어떤 타입의 속성이 제공되어야 하는지 알려주며, 필수 속성이 없는 경우 에러를 발생시켜 유지보수 과정에서의 실수를 사전에 막을 수 있다.
+### 1. JSX로 구현된 Select 컴포넌트  
+```jsx
+const Select = ({ onChange, options, selectedOption }) => {
+const handleChange = (e) => {
+const selected = Object.entries(options)
+.find(([_, value]) => value === e.target.value)?.[0];
+onChange ?.(selected);
+};
+return (
+<select
+onChange ={handleChange}
+value ={selectedOption && options[selectedOption]}
+>
+{Object.entries(options).map(([key, value]) => (
+<option key={key} value={value}>
+{value}
+</option>
+))}
+</select>
+);
+};
+```
+해당 코드에서 속성 값으로 어떤 타입을 전달해야 할지 명확히 알 수 없기 때문에 추가적인 설명이 필요하다.
+### 2. JSDocs로 일부 타입 지정하기
+```js
+/**
+* Select 컴포넌트
+* @param {Object} props - Select 컴포넌트로 넘겨주는 속성
+* @param {Object} props.options - { [key: string]: string } 형식으로 이루어진 option 객
+체
+* @param {string | undefined } props .selectedOption - 현재 선택된 option의 key값
+(optional)
+* @param {function} props.onChange - select 값이 변경되었을 때 불리는 callBack 함수
+(optional)
+* @returns {JSX.Element}
+*/
+```
+JSDocs를 활용하면 각 속성의 대략적인 타입과 어떤 역할을 하는지 파악할 수 있지만,options가 어떤 형식의 객체를 나타내는지나 onChange의 매개변수 및 반환 값에 대한 구체적인 정보를 알기 쉽지 않아서 잘못된 타입이 전달될 수 있는 위험이 존재한다
+### 3. props 인터페이스 적용하기
+```tsx
+type Option = Record <string, string>; // {[key : string]: string}
+interface SelectProps {
+options: Option;
+selectedOption?: string ;
+onChange?: (selected?: string) => void;
+}
+const Select = ({ options, selectedOption, onChange }: SelectProps): JSX.Element =>{
+    //...
+};
+```
+컴포넌트에 타입을 정의할 수 있으며, 각 속성에 타입을 명확하게 정의하고 옵셔널 프로퍼티를 사용해 부모에게 onChange 속성을 받지 못해도 유연하게 사용할 수 있다.
+### 4.  리액트 이벤트
+리액트는 가상 DOM을 다루면서 이벤트도 별도로 관리한다. 리액트 컴포넌트(노드)에 등록되는 이벤트 리스너는 onClick, onChange 처럼 카멜 케이스로 표기한다.
+```tsx
+type EventHandler<Event extends React.SyntheticEvent> = (e: Event) => void | null;
+type ChangeEventHandler = EventHandler<ChangeEvent<HTMLSelectElement>>;
+const eventHandler1: GlobalEventHandlers["onchange"] = (e) => {
+e.target; // 일반 Event는 target이 없음
+};
+const eventHandler2: ChangeEventHandler = (e) => {
+e.target; // 리액트 이벤트(합성 이벤트)는 target이 있음
+};
+```
+```tsx
+const handleChange : React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+const selected = Object.entries (options).find(
+([_, value]) => value === e.target.value
+)?.[0];
+onChange?.(selected);
+};
+```
+### 5.  훅에 타입 추가하기
+```tsx
+const fruits = {
+    apple: '사과',
+    banana: '바나나',
+    blueberry: '블루베리',
+};
+
+type Fruit = keyof typeof fruits;
+const FruitSelect: VFC = () => {
+    const [fruit, changeFruit] = useState<string | undefined>();
+    return (
+        <Select
+            // Error - SetStateAction<undefined>와 맞지 않음
+            // (changeFruit에는 undefined만 매개변수로 넘길 수 있음)
+            onChange={changeFruit}
+            options={fruits}
+            selectedOption={fruit}
+        />
+    );
+}
+// 에러 발생
+const func = () => {
+    changeFruit('orange');
+};
+```
+`keyof typeof obj`를 사용해 fruits 키값만 추출해서 Fruit라는 타입을 새로 만들었다. 해당 타입을 제네릭으로 활용해 다른 값이 할당되면 에러가 발생한다.
+### 6. 제네릭 컴포넌트 만들기
+위의 코드에서 제한된 키와 값을 가지게 만들기 위해 제네릭을 사용한 컴포넌트를 만들어야 한다.
+```tsx
+interface SelectProps<OptionType extends Record<string, string>> {
+options: OptionType;
+selectedOption?: keyof OptionType;
+onChange?: (selected?: keyof OptionType ) => void;
+}
+const Select = <OptionType extends Record<string, string>>({
+options,
+selectedOption,
+onChange,
+}: SelectProps<OptionType>) => {
+// Select component implementation
+};
+```
+객체 형식의 타입을 받아 해당 객체의 키값을selectedOption, onChange의 매개변수에만 적용하도록 만든 예시이다.
+```tsx
+const fruits = {
+    apple: '사과',
+    banana: '바나나',
+    blueberry: '블루베리',
+};
+const FruitSelect: VFC = () => {
+// ...
+// <Select<Fruit > ... />으로 작성해도 되지만, 넘겨주는 props의 타입으로 타입 추론을 해줍니다
+// Type Error - Type “orange ” is not assignable to type “apple ” | “banana ” |'blueberry' | undefined
+return (
+<Select options={fruits} onChange={changeFruit} selectedOption='orange' />
+);
+};
+```
+Select 컴포넌트에 전달되는 props의 타입 기반으로 타입이 추론되어`<Select<추론된 타입>>` 형태의 컴포넌트가 생성된다.
+### 7. HTMLAttributes, ReactProps 적용하기
+```tsx
+type ReactSelectProps = React.ComponentPropsWithoutRef<'select'>;
+interface SelectProps<OptionType extends Record<string, string>> {
+id?: ReactSelectProps['id'];
+className?: ReactSelectProps['className'];
+// ...
+}
+```
+`React.ComponentPropsWithoutRef`를 통해 select의 props를 추출한다. `ReactSelectProps` 타입을 설정해 엘리면트에서 속성의 타입을 그대로 가져온다.
+
+```tsx
+interface SelectProps<OptionType extends Record<string, string>> 
+  extends Pick<ReactSelectProps, 'id' | 'key' >
+{
+  // ...
+}
+```
+ `Pick<Type, ‘key1’ | ‘key2’ ...>`는 객체 형식의 타입에서 key1, key2...의 속성만 추출하여 새로운 객체 형식의 타입을 반환한다. 여러 개의 타입을 가져와야 할 때 사용된다.
+### 8. styled-components를 활용한 스타일 정의
+CSS-in-JS 라이브러리인 styled-components를 사용해 직접 스타일을 적용할 수 있다.
+```tsx
+export const theme = {
+    fontSize: {
+        default: "16px",
+        small: "14px",
+        large: "18px",
+    },
+    color: {
+        white: "#FFFFFF",
+        black: "#000000",
+    },
+};
+
+type Theme = typeof theme;
+export type FontSize = keyof Theme["fontSize"];
+export type Color = keyof Theme["color"];
+```
+```tsx
+interface SelectStyleProps {
+color: Color;
+fontSize: FontSize;
+}
+const StyledSelect = styled.select<SelectStyleProps>`
+color: ${({ color }) => theme.color[color]};
+font-size: ${({ fontSize }) => theme.fontSize [fontSize]};
+`;
+```
+```tsx
+interface SelectProps extends Partial<SelectStyleProps> {
+// ...
+}
+const Select = <OptionType extends Record<string, string>>({
+                                                               fontSize = 'default',
+color = 'black',
+// ...
+}: SelectProps<OptionType>) => {
+// ...
+    return (
+        <StyledSelect
+// ...
+fontSize={fontSize}
+color={color}
+// ...
+/>
+);
+};
+```
+### 9. 공변성과 반공변성
+안전한 타입 가드를 위해서는 특수한 경우를 제외하고는 일반적으로 반공변적인 함수 타입을 설정하는 것이 권장된다. **함수 선언 형식을 사용하면 공변성을 띄고 화살표 함수로 선언하면 반공변성을 띈다.** 
+#### 1. 공변성
+출력값에 적용되며,상위 타입이 하위 타입으로 대체될 수 있다는 개념이다. 구체적인 타입이 넓은 타입으로 반환될 수 있다.
+```ts
+interface Box<out T> {  // out: 공변성
+  value: T;
+}
+
+// Box<string>은 Box<Animal>을 대체할 수 있다
+class Animal {}
+class Dog extends Animal {}
+
+const animalBox: Box<Animal> = { value: new Animal() };
+const dogBox: Box<Dog> = { value: new Dog() };
+
+// Box<Dog>는 Box<Animal>에 할당될 수 있다.
+const anotherAnimalBox: Box<Animal> = dogBox;
+```
+- T의 하위 타입 S가 있을 때, `Box<T>는` `Box<S>`로 교환 가능해진다.
+#### 2. 반공변성
+입력값(인자)에 적용되며, 상위 타입이 하위 타입으로 대체될 수 없다는 개념이다. 더 넓은 타입을 좁은 타입으로 처리할 수 없다.
+```ts
+interface Handler<in T> {  // in: 반공변성
+  handle(value: T): void;
+}
+
+// Handler<Dog>는 Handler<Animal>을 대체할 수 없다
+class Animal {}
+class Dog extends Animal {}
+
+const animalHandler: Handler<Animal> = { handle: (value: Animal) => {} };
+const dogHandler: Handler<Dog> = { handle: (value: Dog) => {} };
+
+// 반공변성: Handler<Dog>는 Handler<Animal>에 할당할 수 없다
+// const anotherAnimalHandler: Handler<Animal> = dogHandler; // 오류 발생
+```
+- T의 하위 타입 S가 있을 때, `Handler<S`>는 `Handler<T>`로 교환할 수 없다.
 
 ## 작성하고 느낀 점
 
-좋았던 점: 가장 관심있는 파트를 배울 수 있어 좋았다. 개발 환경을 빠르게 익혀야 할 때 언어 - 데이터 패칭 - 출력 순으로 이해를 시작하기 때문에 우선순위를 높게 책정한다.
+좋았던 점: ReactDeepDive 1장에서 단편적으로 타입스크립트를 리액트에 적용하는 방법을 배웠었는데 더 깊이있는 내용인 컴포넌트와 요소에 타입을 적용하고 특정 타입만을 가져오게 하거나 안전하게 받아오는 방법을 배웠다.
 
-배운 점: `API`를 호출하고 분기를 설정하는 다양한 방법을 배울 수 있었다.
+배운 점: 리액트에서 타입스크립트를 적용하는 방법에 대해 배웠다.
 
-아쉬운 점: 단위 테스트 개념이 많이 부족한데 쓸만한 예제가 나오지 않아 아쉬웠다.
+아쉬운 점: 내용을 압축한 형태라 예제를 보고 바로 이해할 수 없다. 이해를 돕기 위한 외부 자료를 찾는 데 시간을 소모했다.
 
-향후 계획: `.TSX`를 사용해야 하는 이유에 대해 알아볼 것이다.
+향후 계획: 9장 10장 11장은 ReactDeepDive에서 더 자세하게 다뤘으니 12장 타입스크립트 프로젝트 관리 파트로 진행한다.
