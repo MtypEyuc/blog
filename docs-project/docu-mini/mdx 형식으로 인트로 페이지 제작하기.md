@@ -21,7 +21,7 @@ hide_table_of_contents: false
 ### 구상
 
 #### 화면
-![bone](./img/bone.jpg)
+![bone](../../static/img/Project/bone.jpg)
 
 배열 형식의 데이터를 받고 해당 화면으로 이미지와 제목, 설명, 진행기간을 반복적으로 호출한다고 가정하고 진행한다.
 
@@ -82,7 +82,7 @@ return (
 ```
 화면을 반복적으로 출력한다.
 
-![link](./img/link.jpg)
+![link](../../static/img/Project/link.jpg)
 
 이미지를 클릭하면 화면이 이동하게 만들어야 한다.
 
@@ -93,11 +93,11 @@ return (
 ```
 도큐사우루스에서 지원하는 `Link` 기능을 이용해서 데이터를 받고 감싸주었다.
 
-![page](./img/page.jpg)
+![page](../../static/img/Project/page.jpg)
 
 정상적으로 화면을 출력할 수 있게 된다.
 
-![disc](./img/disc.jpg)
+![disc](../../static/img/Project/disc.jpg)
 
 디스코드를 이용해 `webp`주소를 만들어 이미지를 사용했기 때문에 인터넷 연결이 끊기면 이런 식으로 화면이 출력된다는 단점이 있다.
 
