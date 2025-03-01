@@ -132,7 +132,7 @@ function forEach<T>(arr: T[], callback: (item: T) => void) {
 
 - forEach는 반환값이 없기 때문에 반환값 타입을 void로 정의한다.
 ---
-### 4. 과제
+### 4. <span style={{ color: '#ffd33d' }}> 과제 </span>
 
 ![16.webp](../../../static/img/%ED%95%9C%20%EC%9E%85%20%ED%81%AC%EA%B8%B0%EB%A1%9C%20%EC%9E%98%EB%9D%BC%EB%A8%B9%EB%8A%94%20%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/10/16.webp)
 ![12.webp](../../../static/img/%ED%95%9C%20%EC%9E%85%20%ED%81%AC%EA%B8%B0%EB%A1%9C%20%EC%9E%98%EB%9D%BC%EB%A8%B9%EB%8A%94%20%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/10/12.webp)
