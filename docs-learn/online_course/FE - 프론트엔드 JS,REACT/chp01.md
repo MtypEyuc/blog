@@ -9,6 +9,7 @@ date: "2025-03-10"
 ---
 **작성일:** {frontMatter.date}
 
+![banner.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/banner.webp)
 ## 1. <span style={{ color: '#ffd33d' }}> 강의 진도표 </span>
 
 > ### FE (3/4~3/7)
@@ -24,7 +25,7 @@ date: "2025-03-10"
 ---
 
 ## 2.  <span style={{ color: '#ffd33d' }}> 강의 진행 방식 </span>
-![01.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/01.webp)
+![01.webp](../../../static/img/FE%20-%20프론트엔드%20JS,REACT/01/01.webp)
 
 강의는 자바스크립트 코드를 HTML에서 출력하는 것을 목표로 하고 있습니다. HTML에서 직접 다루던 객체를 JS에서 컴포넌트 형태로 생성하기 위해 필요한 자바스크립트 지식을 다루고 있으며,
 기초적인 내용이기 때문에 다른 강의에 비해 진도를 많이 빼는 듯한 느낌을 받았습니다.  
@@ -34,9 +35,9 @@ date: "2025-03-10"
 ---
 
 ## 3.  <span style={{ color: '#ffd33d' }}> 과제 제출 방식 </span>
-![02.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/02.webp)
-![03.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/03.webp)
-![04.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/04.webp)
+![02.webp](../../../static/img/FE%20-%20프론트엔드%20JS,REACT/01/02.webp)
+![03.webp](../../../static/img/FE%20-%20프론트엔드%20JS,REACT/01/03.webp)
+![04.webp](../../../static/img/FE%20-%20프론트엔드%20JS,REACT/01/04.webp)
 
 과제 제출 방식은 구글 시트에 있는 진도표에서 요구사항을 영상으로 확인 후 해당 기능을 수행하는 페이지를 만들어 깃허브에 제출하는 방식으로 진행됩니다.
 강의 내용에서 HTML과 CSS는 다루고 있지 않고, 템플릿을 공유하고 있지 않기 때문에 처음 배우시는 분들은 난이도가 있을 수 있겠다는 생각이 듭니다.
