@@ -5,6 +5,19 @@
     padding: 16px;
 }
 
+.book-list-padding {
+    font-size: 2.2rem;
+    color: #fcdc32;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.book-list h2 {
+    font-size: 2.2rem;
+    color: #fcdc32;
+    text-align: center;
+}
+
 .book-container {
     display: grid;
     grid-template-columns: 4fr 8fr;
@@ -31,6 +44,11 @@
     color: #333;
 }
 
+.book-info h5 {
+    font-size: 1rem;
+    color: #333;
+}
+
 .book-info p {
     font-size: 1rem;
     color: #666;
@@ -38,3 +56,4 @@
     overflow-wrap: break-word;
     white-space: normal;
 }
+
