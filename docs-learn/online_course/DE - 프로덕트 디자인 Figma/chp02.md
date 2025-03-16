@@ -9,6 +9,8 @@ date: "2025-03-16"
 ---
 **작성일:** {frontMatter.date}
 
+![banner.webp](../../../static/img/DE%20-%20%ED%94%84%EB%A1%9C%EB%8D%95%ED%8A%B8%20%EB%94%94%EC%9E%90%EC%9D%B8%20Figma/banner.webp)
+
 ## 1. <span style={{ color: '#ffd33d' }}> 강의 진도표 </span>
 
 >### DE (3/10~3/14)
