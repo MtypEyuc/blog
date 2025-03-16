@@ -25,7 +25,6 @@ date: "2025-03-16"
 - Section 5~6
 
 ---
-
 ## 2.  <span style={{ color: '#ffd33d' }}> TODO-LIST </span>
 앱을 익히기 위해 TODO-LIST 앱을 만들면서 설명하고 있습니다. 커리큘럼을 따라가면 리액트 기본 사용 방법을 이해할 수 있는 과정입니다.
 
@@ -47,6 +46,7 @@ Tailwind CSS를 사용해 직관적이고 빠르게 스타일링 할 수 있습�
 >### 6. 기능
 ![fn1.gif](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/02/fn1.gif)
 
+---
 ## 3.  <span style={{ color: '#ffd33d' }}> NETFLIX-CLONE </span>
 
 >### 1. API 받아오기
@@ -75,6 +75,7 @@ cli 명령어를 사용해 깃헙 아이디와 리포지토리 주소를 포함�
 >### 7. 기능 
 ![fn2.gif](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/02/fn2.gif)
 
+---
 ## 4.  <span style={{ color: '#ffd33d' }}> 중간 점검 </span>
 ![05.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/02/05.webp)
 ![06.webp](../../../static/img/FE%20-%20%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%20JS%2CREACT/02/06.webp)
@@ -82,6 +83,7 @@ cli 명령어를 사용해 깃헙 아이디와 리포지토리 주소를 포함�
 
 과제로 만들어야 할 앱을 작성하는 방법과 Q&A를 진행했습니다. 
 
+---
 ## <span style={{ color: '#ffd33d' }}> 후기 </span>
 <details>
 <summary> 펼치기 </summary>
