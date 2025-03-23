@@ -25,7 +25,8 @@ date: "2025-03-23"
 #### Day 15 Netflix 클론 - 추가 기능 구현
 - 사용자 즐겨찾기 기능 추가 등
 
-## 3.  <span style={{ color: '#ffd33d' }}> Supabase 실습 week 3 </span>
+---
+## 2.  <span style={{ color: '#ffd33d' }}> Supabase 실습 week 3 </span>
 
 ![20250323_054035.webp](../../../static/img/%ED%92%80%EC%8A%A4%ED%83%9D%20Next.js%20Supabase/03/20250323_054035.webp)
 ![20250323_054759.webp](../../../static/img/%ED%92%80%EC%8A%A4%ED%83%9D%20Next.js%20Supabase/03/20250323_054759.webp)
@@ -34,6 +35,7 @@ date: "2025-03-23"
 
 
 
+---
 ## 3.  <span style={{ color: '#ffd33d' }}> Supabase 과제 week 3 </span>
 
 
@@ -52,6 +54,7 @@ Supabase 기능을 사용하면 프론트에서 쿼리 제작이 가능해 요�
 
 ![gsg.gif](../../../static/img/%ED%92%80%EC%8A%A4%ED%83%9D%20Next.js%20Supabase/03/gsg.gif)
 
+---
 ## <span style={{ color: '#ffd33d' }}> 후기 </span>
 <details>
 <summary> 펼치기 </summary>
