@@ -1,0 +1,113 @@
+.profileCard {
+    width: 100%;
+    min-width: 1000px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: sans-serif;
+    position: relative;
+    background: #fff;
+    margin: 0 auto;
+}
+
+.cover {
+    height: 120px;
+    background: linear-gradient(to right, #cce5ff, #99ccff);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 48px 24px;
+    position: relative;
+}
+
+.avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #ccc;
+    position: absolute;
+    top: 60px;
+    left: 48px;
+    transform: translateY(-50%);
+}
+
+.userInfo {
+    margin-left: 200px;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.Button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    background: white;
+    border: 2px solid #1da1f2;
+    color: #1da1f2;
+    border-radius: 9999px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.settingsButton:hover {
+    background: #e6f4ff;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.nickname {
+    color: #657786;
+    font-size: 14px;
+}
+
+.stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ✅ 반응형 스타일 */
+@media (max-width: 768px) {
+    .profileCard {
+        min-width: 0;
+    }
+
+    .content {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .avatar {
+        position: static;
+        margin-bottom: 16px;
+        transform: none;
+    }
+
+    .userInfo {
+        margin-left: 0;
+    }
+
+    .settingsButton {
+        position: static;
+        margin-top: 8px;
+    }
+
+    .stats {
+        justify-content: center;
+        flex-direction: row;
+        gap: 16px;
+    }
+}

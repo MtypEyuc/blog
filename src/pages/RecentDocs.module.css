@@ -1,0 +1,33 @@
+.card {
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.list {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin: 0;
+}
+
+.listItem {
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+}
+
+.link {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

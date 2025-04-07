@@ -7,6 +7,8 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
+import UserProfile from "@site/src/pages/profile";
+import RecentDocs from "@site/src/pages/fileList";
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -37,6 +39,8 @@ export default function Home(): ReactNode {
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
+          <UserProfile/>
+          <RecentDocs/>
         <HomepageFeatures />
       </main>
     </Layout>
