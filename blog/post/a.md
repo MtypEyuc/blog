@@ -32,38 +32,24 @@ sidebar_label: 자기소개서
 ## 6. 자기소개
 - ### 개발자가된 계기
 
-[//]: # (- 대학 졸업 후 돼지 연구소에서 1년간 인공지능을 이용한 자동화 사육을 위해 데이터를 수집하는 일을 맡게 되었는데,)
-
-[//]: # (  돼지의 성장에 따라 급이 시간과 사육장의 온도와 환기를 데이터에 따라 기계가 판단하여 조정하는 것을 보았습니다.)
-
-[//]: # (  이로 인해 설계와 새로운 기술에 대해 깊게 생각하는 시간을 가지게 되었습니다.)
-
-[//]: # (- 1년이란 시간을 돼지와 함께 보내다 보면 성장하는 과정을 지켜보게 되는데, 손바닥만 했던 자돈이 115kg의 성체가 돼서 출하되는 과정을 지켜보자니)
-
-[//]: # (  돼지도 성장해서 가치를 증명하러 떠나는데 연구소에서 업무를 반복하며 제자리 걸음만 하고 있다는 생각이 들었습니다. 연구소 업무라고 특별할 것도 없었고)
-
-[//]: # (  친구가 위험한 업무 중 사고를 당했는데 담당자와 관련 농민이 책임없는 행동을 하는 것을 보고 전향하게 되었습니다.)
 
 **[전문성을 가진 직업을 가지기 위해]**
-<!-- truncate -->
-대학 졸업 전 휴학과 코로나를 거치며 다양한 직업을 경험했습니다. 각종 아르바이트, 음향장비, 제빙, 식당 주방 업무 등등의 직업을 경험하면서
-배우다 보니 단순 작업은 처음 하는 사람도 일주일 혹은 한 달이면 적응하기 때문에 의욕만 있다면 누구든 할 수 있겠다는 생각이 들었습니다.
-<!-- truncate -->
-전문성을 가진 직업을 얻기 위해 대학을 졸업하기로 결심하였고 교수의 요청으로 돼지 연구소에서 인공지능을 활용한 사육 데이터
-수집을 맡게 된 적이 있었는데, 최신식 설비와 여러 대의 카메라가 인간을 대체할 수 있다는 것에 흥미를 가지게 되었습니다.
-<!-- truncate -->
-후임에게 인수인계를 하는 과정에서 연구소 업무 역시 알고 보면 단순 작업의 반복에 불과하다고 생각하고 퇴직 후 지인이 추천한
-SI 전문가 과정에 참가하기로 결심했습니다.
+
+
+다양한 아르바이트 경험을 통해 단순 반복 업무보다 전문성을 가진 직업의 중요성을 깨달았습니다.
+대학 졸업 후 인공지능을 활용한 사육 데이터 수집 업무를 맡으며 기술이 인간의 역할을 대체하는 과정에 흥미를 느꼈습니다.
+이를 계기로 기술을 직접 다루고 창의적으로 문제를 해결할 수 있는 개발자의 길을 선택했습니다.
 
 
 
 - ### 개발자가 되기 위한 성장과정
 **[10개월 과정의 부트캠프]**
 <!-- truncate -->
-고용보험 기간 동안 빠르게 익히기 위해서 배달의 민족 앱 창시자를 배출했다는 스파르타식 학원에 등록했습니다. 주6일 9시 등원
-22시 퇴원을 10개월간 반복하는 일정을 소화했습니다.
+SI 전문가 과정을 통해 프로그래밍 기초와 시스템 통합 지식을 습득하며 개발 역량을 키웠습니다.
+앞으로는 데이터 기반의 효율적인 시스템을 구축해 기업의 성장에 기여하는 개발자가 되고자 합니다.
 <!-- truncate -->
-본 과정이 시작되고  Eclipse를 이용해서 JAVA와 JavaScript,JSP,Bootstrap을 활용한  기초를 닦았고, 이후 NEXACRO, REACT, VUE를 사용한 프로젝트를 진행했습니다.
+본 과정에서 Eclipse 환경에서 Java, JavaScript, JSP, Bootstrap을 활용하여 개발의 기초를 다졌으며, 이후 NEXACRO, React, Vue를 활용한 프로젝트를 수행하며 프론트엔드와 백엔드 전반의 개발 경험을 쌓았습니다.
+
 
 **[구직활동 경험을 통한 성장]**
 <!-- truncate -->
@@ -72,34 +58,17 @@ SI 전문가 과정에 참가하기로 결심했습니다.
 
 - ### 강점 및 약점
 
-[//]: # (-  업무의 완성을 위해서 최선을 다할 수 있습니다. 이전에 하던 일들이 체중과는 크게 상관없던 일이라서 몸무게가 130KG 이상 불어서 연구소 업무에)
+목표를 세우면 끝까지 실천하는 꾸준함으로 다이어트에 성공한 경험이 있습니다.
+이를 통해 자기관리와 지속적인 노력이 성과로 이어진다는 확신을 얻었습니다.
+다만 계획에 집중하는 경향이 있어, 최근에는 피드백을 적극적으로 수용하며 협업 능력을 키우고 있습니다.
 
-[//]: # (   영향을 끼친 적이 있었는데, 업무를 수행하기 위해 체중을 80KG 까지 감량했습니다. 이후 체중과 건강에 관심을 가지게 되었고, 체지방 한 자리 이상을)
 
-[//]: # (   벗어나지 않게 노력중입니다. 이러한 건강 관리 때문에 제한된 식사를 해야만 하는데, 이로 인해 다른 사람들과 식당에 가거나 술자리에 참여하는)
-
-[//]: # (   것이 어려워 서먹하게 지냈던 적도 있었습니다.)
 **[대부분 5인 이하 사업장]**
 <!-- truncate -->
 5인 이하 사업장 특성상 근로자가 대부분의 업무를 이해해야 했습니다. 제빙 시설에서 얼음을 운반, 세공, 포장 운송하는 과정,
 주방의 경우 서빙 사이드 메뉴와 모든 메뉴를 만들 수 있어야 했고, 연구소의 경우 데이터 수집, 사육과정, 교배, 도태, 시체처리,출하 등등의
 업무를 이해하며 수행해야 했기 때문에 다양한 개발환경에도 적응이 가능합니다.
 <!-- truncate -->
-
-[//]: # (**[협업 과정이 부실했던 부트캠프 프로젝트]**)
-
-[//]: # (<!-- truncate -->)
-
-[//]: # (부트캠프 특성상 의지가 약한 사람은 정말 힘든 구조이기 때문에 인원들의 의욕이 중간에 떨어지거나 포기하게 되는 사람들이 생겨, )
-
-[//]: # (소수의 인원으로 프로젝트를 완성했기 때문에 소스트리나 깃 등의 협업 도구 활용이 익숙하지 않아서 개인적으로 공부해야 했습니다.)
-<!-- truncate -->
-**[지속적인 건강 관리]**
-<!-- truncate -->
-건강하게 오래 사는 것이 삶의 목표입니다. 술과 담배를 멀리하고 건강식 위주의 식사를 하며 규칙적인 생활을 지킵니다.
-체지방을 5% 미만으로 유지하기 위해서 매일 10km를 이동하고 근력 운동을 하고 있습니다. 학원에 다닐 때는 헬스 시간이 부족하니
-1시간 걸어서 학원 등 하교를 하며 쉬는 시간은 옥상에 기구를 두고 근력운동을 하며 건강관리를 했습니다.
-
 
 ---
 ## 7. 프로젝트
@@ -326,68 +295,3 @@ SI 전문가 과정에 참가하기로 결심했습니다.
 
 [뷰 기능 통신](https://holg113.netlify.app/blog/%EB%B7%B0%20%EA%B8%B0%EB%8A%A5%20%ED%86%B5%EC%8B%A0)
 <!-- truncate -->
-
-
-
-
-[//]: # (## Getting Started)
-
-[//]: # ()
-[//]: # (Get started by **creating a new site**.)
-
-[//]: # ()
-[//]: # (Or **try Docusaurus immediately** with **[docusaurus.new]&#40;https://docusaurus.new&#41;**.)
-
-[//]: # ()
-[//]: # (### What you'll need)
-
-[//]: # ()
-[//]: # (- [Node.js]&#40;https://nodejs.org/en/download/&#41; version 18.0 or above:)
-
-[//]: # (  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.)
-
-[//]: # ()
-[//]: # (## Generate a new site)
-
-[//]: # ()
-[//]: # (Generate a new Docusaurus site using the **classic template**.)
-
-[//]: # ()
-[//]: # (The classic template will automatically be added to your project after you run the command:)
-
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (npm init docusaurus@latest my-website classic)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.)
-
-[//]: # ()
-[//]: # (The command also installs all necessary dependencies you need to run Docusaurus.)
-
-[//]: # ()
-[//]: # (## Start your site)
-
-[//]: # ()
-[//]: # (Run the development server:)
-
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (cd my-website)
-
-[//]: # (npm run start)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.)
-
-[//]: # ()
-[//]: # (The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.)
-
-[//]: # ()
-[//]: # (Open `docs/intro.md` &#40;this page&#41; and edit some lines: the site **reloads automatically** and displays your changes.)
